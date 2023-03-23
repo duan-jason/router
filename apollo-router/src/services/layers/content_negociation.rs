@@ -71,9 +71,8 @@ where
 
                     return Ok(ControlFlow::Break(response.into()));
                 }
-                let accepts_multipart = accepts_multipart(req.router_request.headers());
-                let accepts_json = accepts_json(req.router_request.headers());
-                let accepts_wildcard = accepts_wildcard(req.router_request.headers());
+                let (accepts_json, accepts_wildcard, accepts_multipart) =
+                    parse_accept(req.router_request.headers());
 
                 if accepts_wildcard || accepts_multipart || accepts_json {
                     req.context
@@ -181,75 +180,48 @@ fn content_type_is_json(headers: &HeaderMap) -> bool {
     })
 }
 
-/// Returns true if the headers contain `accept: application/json` or `accept: application/graphql-response+json`,
-/// or if there is no `accept` header
-fn accepts_json(headers: &HeaderMap) -> bool {
-    !headers.contains_key(ACCEPT)
-        || headers.get_all(ACCEPT).iter().any(|value| {
-            value
-                .to_str()
-                .map(|accept_str| {
-                    let mut list = MediaTypeList::new(accept_str);
-
-                    list.any(|mime| {
-                        mime.as_ref()
-                            .map(|mime| {
-                                (mime.ty == APPLICATION && mime.subty == JSON)
-                                    || (mime.ty == APPLICATION
-                                        && mime.subty.as_str() == "graphql-response"
-                                        && mime.suffix == Some(JSON))
-                            })
-                            .unwrap_or(false)
-                    })
-                })
-                .unwrap_or(false)
-        })
-}
-
-/// Returns true if the headers contain header `accept: */*`
-fn accepts_wildcard(headers: &HeaderMap) -> bool {
-    headers.get_all(ACCEPT).iter().any(|value| {
-        value
-            .to_str()
-            .map(|accept_str| {
-                let mut list = MediaTypeList::new(accept_str);
-
-                list.any(|mime| {
-                    mime.as_ref()
-                        .map(|mime| (mime.ty == _STAR && mime.subty == _STAR))
-                        .unwrap_or(false)
-                })
-            })
-            .unwrap_or(false)
-    })
-}
-
-/// Returns true if the headers contain accept header to enable defer
-fn accepts_multipart(headers: &HeaderMap) -> bool {
-    headers.get_all(ACCEPT).iter().any(|value| {
-        value
-            .to_str()
-            .map(|accept_str| {
-                let mut list = MediaTypeList::new(accept_str);
-
-                list.any(|mime| {
-                    mime.as_ref()
-                        .map(|mime| {
-                            mime.ty == MULTIPART
-                                && mime.subty == MIXED
-                                && mime.get_param(
-                                    mediatype::Name::new(MULTIPART_DEFER_SPEC_PARAMETER)
-                                        .expect("valid name"),
-                                ) == Some(
-                                    mediatype::Value::new(MULTIPART_DEFER_SPEC_VALUE)
-                                        .expect("valid value"),
-                                )
-                        })
-                        .unwrap_or(false)
-                })
-            })
-            .unwrap_or(false)
-    })
+// Clippy suggests `for mime in MediaTypeList::new(str).flatten()` but less indentation
+// does not seem worth making it invisible that Result is involved.
+#[allow(clippy::manual_flatten)]
+/// Returns (accepts_json, accepts_wildcard, accepts_multipart)
+fn parse_accept(headers: &HeaderMap) -> (bool, bool, bool) {
+    let mut header_present = false;
+    let mut accepts_json = false;
+    let mut accepts_wildcard = false;
+    let mut accepts_multipart = false;
+    for value in headers.get_all(ACCEPT) {
+        header_present = true;
+        if let Ok(str) = value.to_str() {
+            for result in MediaTypeList::new(str) {
+                if let Ok(mime) = result {
+                    if !accepts_json
+                        && ((mime.ty == APPLICATION && mime.subty == JSON)
+                            || (mime.ty == APPLICATION
+                                && mime.subty.as_str() == "graphql-response"
+                                && mime.suffix == Some(JSON)))
+                    {
+                        accepts_json = true
+                    }
+                    if !accepts_wildcard && (mime.ty == _STAR && mime.subty == _STAR) {
+                        accepts_wildcard = true
+                    }
+                    if !accepts_multipart && (mime.ty == MULTIPART && mime.subty == MIXED) {
+                        let parameter = mediatype::Name::new(MULTIPART_DEFER_SPEC_PARAMETER)
+                            .expect("valid name");
+                        let value =
+                            mediatype::Value::new(MULTIPART_DEFER_SPEC_VALUE).expect("valid value");
+                        if mime.get_param(parameter) == Some(value) {
+                            accepts_multipart = true
+                        }
+                    }
+                }
+            }
+        }
+    }
+    if !header_present {
+        accepts_json = true
+    }
+    (accepts_json, accepts_wildcard, accepts_multipart)
 }
 
 #[cfg(test)]
@@ -264,17 +236,20 @@ mod tests {
             HeaderValue::from_static(APPLICATION_JSON.essence_str()),
         );
         default_headers.append(ACCEPT, HeaderValue::from_static("foo/bar"));
-        assert!(accepts_json(&default_headers));
+        let (accepts_json, _, _) = parse_accept(&default_headers);
+        assert!(accepts_json);
 
         let mut default_headers = HeaderMap::new();
         default_headers.insert(ACCEPT, HeaderValue::from_static("*/*"));
         default_headers.append(ACCEPT, HeaderValue::from_static("foo/bar"));
-        assert!(accepts_wildcard(&default_headers));
+        let (_, accepts_wildcard, _) = parse_accept(&default_headers);
+        assert!(accepts_wildcard);
 
         let mut default_headers = HeaderMap::new();
         // real life browser example
         default_headers.insert(ACCEPT, HeaderValue::from_static("text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8"));
-        assert!(accepts_wildcard(&default_headers));
+        let (_, accepts_wildcard, _) = parse_accept(&default_headers);
+        assert!(accepts_wildcard);
 
         let mut default_headers = HeaderMap::new();
         default_headers.insert(
@@ -282,7 +257,8 @@ mod tests {
             HeaderValue::from_static(GRAPHQL_JSON_RESPONSE_HEADER_VALUE),
         );
         default_headers.append(ACCEPT, HeaderValue::from_static("foo/bar"));
-        assert!(accepts_json(&default_headers));
+        let (accepts_json, _, _) = parse_accept(&default_headers);
+        assert!(accepts_json);
 
         let mut default_headers = HeaderMap::new();
         default_headers.insert(
@@ -293,6 +269,7 @@ mod tests {
             ACCEPT,
             HeaderValue::from_static(MULTIPART_DEFER_CONTENT_TYPE),
         );
-        assert!(accepts_multipart(&default_headers));
+        let (_, _, accepts_multipart) = parse_accept(&default_headers);
+        assert!(accepts_multipart);
     }
 }
