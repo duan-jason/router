@@ -548,7 +548,10 @@ impl Telemetry {
         builder = setup_tracing(builder, &tracing_config.otlp, trace_config)?;
         builder = setup_tracing(builder, &config.apollo, trace_config)?;
         // For metrics
-        builder = builder.with_simple_exporter(metrics::span_metrics_exporter::Exporter::default());
+        // builder = builder.with_batch_exporter(
+        //     metrics::span_metrics_exporter::Exporter::default(),
+        //     opentelemetry::runtime::Tokio,
+        // );
 
         let tracer_provider = builder.build();
         Ok(tracer_provider)
