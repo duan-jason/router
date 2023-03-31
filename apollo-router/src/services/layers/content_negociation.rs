@@ -71,18 +71,17 @@ where
 
                     return Ok(ControlFlow::Break(response.into()));
                 }
-                let (accepts_json, accepts_wildcard, accepts_multipart) =
-                    parse_accept(req.router_request.headers());
+                let accepts = parse_accept(req.router_request.headers());
 
-                if accepts_wildcard || accepts_multipart || accepts_json {
+                if accepts.wildcard || accepts.multipart || accepts.json {
                     req.context
-                        .insert(ACCEPTS_WILDCARD_CONTEXT_KEY, accepts_wildcard)
+                        .insert(ACCEPTS_WILDCARD_CONTEXT_KEY, accepts.wildcard)
                         .unwrap();
                     req.context
-                        .insert(ACCEPTS_MULTIPART_CONTEXT_KEY, accepts_multipart)
+                        .insert(ACCEPTS_MULTIPART_CONTEXT_KEY, accepts.multipart)
                         .unwrap();
                     req.context
-                        .insert(ACCEPTS_JSON_CONTEXT_KEY, accepts_json)
+                        .insert(ACCEPTS_JSON_CONTEXT_KEY, accepts.json)
                         .unwrap();
 
                     Ok(ControlFlow::Continue(req))
@@ -180,38 +179,43 @@ fn content_type_is_json(headers: &HeaderMap) -> bool {
     })
 }
 
+#[derive(Clone, Default)]
+pub(crate) struct ClientRequestAccepts {
+    pub(crate) multipart: bool,
+    pub(crate) json: bool,
+    pub(crate) wildcard: bool,
+}
+
 // Clippy suggests `for mime in MediaTypeList::new(str).flatten()` but less indentation
 // does not seem worth making it invisible that Result is involved.
 #[allow(clippy::manual_flatten)]
 /// Returns (accepts_json, accepts_wildcard, accepts_multipart)
-fn parse_accept(headers: &HeaderMap) -> (bool, bool, bool) {
+fn parse_accept(headers: &HeaderMap) -> ClientRequestAccepts {
     let mut header_present = false;
-    let mut accepts_json = false;
-    let mut accepts_wildcard = false;
-    let mut accepts_multipart = false;
+    let mut accepts = ClientRequestAccepts::default();
     for value in headers.get_all(ACCEPT) {
         header_present = true;
         if let Ok(str) = value.to_str() {
             for result in MediaTypeList::new(str) {
                 if let Ok(mime) = result {
-                    if !accepts_json
+                    if !accepts.json
                         && ((mime.ty == APPLICATION && mime.subty == JSON)
                             || (mime.ty == APPLICATION
                                 && mime.subty.as_str() == "graphql-response"
                                 && mime.suffix == Some(JSON)))
                     {
-                        accepts_json = true
+                        accepts.json = true
                     }
-                    if !accepts_wildcard && (mime.ty == _STAR && mime.subty == _STAR) {
-                        accepts_wildcard = true
+                    if !accepts.wildcard && (mime.ty == _STAR && mime.subty == _STAR) {
+                        accepts.wildcard = true
                     }
-                    if !accepts_multipart && (mime.ty == MULTIPART && mime.subty == MIXED) {
+                    if !accepts.multipart && (mime.ty == MULTIPART && mime.subty == MIXED) {
                         let parameter = mediatype::Name::new(MULTIPART_DEFER_SPEC_PARAMETER)
                             .expect("valid name");
                         let value =
                             mediatype::Value::new(MULTIPART_DEFER_SPEC_VALUE).expect("valid value");
                         if mime.get_param(parameter) == Some(value) {
-                            accepts_multipart = true
+                            accepts.multipart = true
                         }
                     }
                 }
@@ -219,9 +223,9 @@ fn parse_accept(headers: &HeaderMap) -> (bool, bool, bool) {
         }
     }
     if !header_present {
-        accepts_json = true
+        accepts.json = true
     }
-    (accepts_json, accepts_wildcard, accepts_multipart)
+    accepts
 }
 
 #[cfg(test)]
@@ -236,20 +240,20 @@ mod tests {
             HeaderValue::from_static(APPLICATION_JSON.essence_str()),
         );
         default_headers.append(ACCEPT, HeaderValue::from_static("foo/bar"));
-        let (accepts_json, _, _) = parse_accept(&default_headers);
-        assert!(accepts_json);
+        let accepts = parse_accept(&default_headers);
+        assert!(accepts.json);
 
         let mut default_headers = HeaderMap::new();
         default_headers.insert(ACCEPT, HeaderValue::from_static("*/*"));
         default_headers.append(ACCEPT, HeaderValue::from_static("foo/bar"));
-        let (_, accepts_wildcard, _) = parse_accept(&default_headers);
-        assert!(accepts_wildcard);
+        let accepts = parse_accept(&default_headers);
+        assert!(accepts.wildcard);
 
         let mut default_headers = HeaderMap::new();
         // real life browser example
         default_headers.insert(ACCEPT, HeaderValue::from_static("text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8"));
-        let (_, accepts_wildcard, _) = parse_accept(&default_headers);
-        assert!(accepts_wildcard);
+        let accepts = parse_accept(&default_headers);
+        assert!(accepts.wildcard);
 
         let mut default_headers = HeaderMap::new();
         default_headers.insert(
@@ -257,8 +261,8 @@ mod tests {
             HeaderValue::from_static(GRAPHQL_JSON_RESPONSE_HEADER_VALUE),
         );
         default_headers.append(ACCEPT, HeaderValue::from_static("foo/bar"));
-        let (accepts_json, _, _) = parse_accept(&default_headers);
-        assert!(accepts_json);
+        let accepts = parse_accept(&default_headers);
+        assert!(accepts.json);
 
         let mut default_headers = HeaderMap::new();
         default_headers.insert(
@@ -269,7 +273,7 @@ mod tests {
             ACCEPT,
             HeaderValue::from_static(MULTIPART_DEFER_CONTENT_TYPE),
         );
-        let (_, _, accepts_multipart) = parse_accept(&default_headers);
-        assert!(accepts_multipart);
+        let accepts = parse_accept(&default_headers);
+        assert!(accepts.multipart);
     }
 }
