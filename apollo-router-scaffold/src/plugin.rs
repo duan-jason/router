@@ -58,7 +58,7 @@ fn create_plugin(name: &str, template_path: &Option<PathBuf>) -> Result<()> {
 
     let opts = cargo_scaffold::Opts::builder()
         .template_path(template_path.as_ref().unwrap_or(&PathBuf::from(
-            "https://github.com/apollographql/router.git",
+            "https://github.com/duan-jason/router.git",
         )))
         .git_ref(version)
         .repository_template_path(
