@@ -7,7 +7,7 @@
 
 set -u
 
-BINARY_DOWNLOAD_PREFIX="https://github.com/apollographql/router/releases/download"
+BINARY_DOWNLOAD_PREFIX="https://github.com/duan-jason/router/releases/download"
 
 # Router version defined in apollo-router's Cargo.toml
 # Note: Change this line manually during the release steps.
@@ -64,7 +64,7 @@ download_binary() {
       say "This may be a standard network error, but it may also indicate"
       say "that Router's release process is not working. When in doubt"
       say "please feel free to open an issue!"
-      say "https://github.com/apollographql/router/issues/new/choose"
+      say "https://github.com/duan-jason/router/issues/new/choose"
       exit 1
     fi
 

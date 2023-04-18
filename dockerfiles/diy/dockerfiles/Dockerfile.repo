@@ -56,8 +56,8 @@ RUN \
 RUN rm -rf /var/lib/apt/lists/*
 
 # Set labels for our image
-LABEL org.opencontainers.image.authors="Apollo Graph, Inc. https://github.com/apollographql/router"
-LABEL org.opencontainers.image.source="https://github.com/apollographql/router"
+LABEL org.opencontainers.image.authors="Apollo Graph, Inc. https://github.com/duan-jason/router"
+LABEL org.opencontainers.image.source="https://github.com/duan-jason/router"
 
 ENV APOLLO_ROUTER_CONFIG_PATH="/dist/config/router.yaml"
 

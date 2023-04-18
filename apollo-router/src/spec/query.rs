@@ -140,7 +140,7 @@ impl Query {
                                     nullified: Vec::new(),
                                 };
                                 // Detect if root __typename is asked in the original query (the qp doesn't put root __typename in subselections)
-                                // cf https://github.com/apollographql/router/issues/1677
+                                // cf https://github.com/duan-jason/router/issues/1677
                                 let operation_kind_if_root_typename =
                                     original_operation.and_then(|op| {
                                         op.selection_set
@@ -233,7 +233,7 @@ impl Query {
             }
             Some(Value::Null) => {
                 // Detect if root __typename is asked in the original query (the qp doesn't put root __typename in subselections)
-                // cf https://github.com/apollographql/router/issues/1677
+                // cf https://github.com/duan-jason/router/issues/1677
                 let operation_kind_if_root_typename = original_operation.and_then(|op| {
                     op.selection_set
                         .iter()

@@ -11,7 +11,7 @@ import ElasticNotice from '../../shared/elastic-notice.mdx';
 >
 > **For most router customizations,** we recommend instead creating a [Rhai script](./rhai/) or [external coprocessor](./coprocessor/). Both of these customization types provide strong separation of concerns and fault isolation.
 >
-> **If a native plugin seems necessary for your use case,** please [open an issue](https://github.com/apollographql/router/issues) so we can investigate adding the required functionality to the stock router binary.
+> **If a native plugin seems necessary for your use case,** please [open an issue](https://github.com/duan-jason/router/issues) so we can investigate adding the required functionality to the stock router binary.
 
 <ElasticNotice />
 
@@ -35,7 +35,7 @@ cargo install cargo-scaffold
 1. Use the `cargo-scaffold` command to create a project for your custom router:
 
    ```bash
-   cargo-scaffold scaffold https://github.com/apollographql/router.git -r apollo-router-scaffold/templates/base -t main
+   cargo-scaffold scaffold https://github.com/duan-jason/router.git -r apollo-router-scaffold/templates/base -t main
    ```
 
 2. The `cargo-scaffold` command prompts you for some configuration settings. For the purposes of this tutorial, set your project's name to `starstuff`.
@@ -162,7 +162,7 @@ Note that depending on the structure of your plugin, the command might fail to r
 
 ## Docker
 
-You can use the provided [Dockerfile](https://github.com/apollographql/router/tree/main/apollo-router-scaffold/templates/base/Dockerfile) to build a release container.
+You can use the provided [Dockerfile](https://github.com/duan-jason/router/tree/main/apollo-router-scaffold/templates/base/Dockerfile) to build a release container.
 
 Make sure your router is configured to listen to `0.0.0.0` so you can query it from outside the container:
 

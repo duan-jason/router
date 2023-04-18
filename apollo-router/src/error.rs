@@ -477,7 +477,7 @@ impl ParseErrors {
                     ty: err.message().into(),
                 });
                 // `format!` works around https://github.com/rust-lang/rust/issues/107118
-                // to test the panic from https://github.com/apollographql/router/issues/2269
+                // to test the panic from https://github.com/duan-jason/router/issues/2269
                 #[allow(clippy::format_in_format_args)]
                 {
                     println!("{}", format!("{report:?}"));

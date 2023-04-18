@@ -64,7 +64,7 @@ extraVolumeMounts: []
 extraVolumes: []
 
 image:
-  repository: ghcr.io/apollographql/router
+  repository: ghcr.io/duan-jason/router
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""

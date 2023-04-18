@@ -63,7 +63,7 @@ terminate () {
 ROUTER_VERSION=
 BUILD_IMAGE=false
 DEBUG_IMAGE=false
-DEFAULT_REPO="https://github.com/apollographql/router.git"
+DEFAULT_REPO="https://github.com/duan-jason/router.git"
 GIT_REPO=
 
 ###

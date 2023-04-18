@@ -10,7 +10,7 @@
   command = """\
   cd ../
   rm -rf monodocs
-  git clone https://github.com/apollographql/docs --branch main --single-branch monodocs
+  git clone https://github.com/duan-jason/docs --branch main --single-branch monodocs
   cd monodocs
   npm i
   cp -r ../docs local

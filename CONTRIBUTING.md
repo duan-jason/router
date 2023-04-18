@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/apollographql/space-kit/main/src/illustrations/svgs/astronaut1.svg" width="100%" height="144">
+<img src="https://raw.githubusercontent.com/duan-jason/space-kit/main/src/illustrations/svgs/astronaut1.svg" width="100%" height="144">
 
 # Contributing to Apollo Router
 
@@ -51,31 +51,31 @@ Refer to [the README file](README.md) or run `cargo run --help` for more informa
 
 - `crates/apollo-router/src/main.rs`: the entry point for the executable
 
-Some of the functionalities rely on the current Javascript / TypeScript implementation, provided by [apollo federation](https://github.com/apollographql/federation), which is exposed through the [federation router-bridge](https://github.com/apollographql/federation/tree/main/router-bridge).
+Some of the functionalities rely on the current Javascript / TypeScript implementation, provided by [apollo federation](https://github.com/duan-jason/federation), which is exposed through the [federation router-bridge](https://github.com/duan-jason/federation/tree/main/router-bridge).
 
 ## Documentation
 
 Documentation for using and contributing to the Apollo Router is built using Gatsby
-and [Apollo's Docs Theme for Gatsby](https://github.com/apollographql/gatsby-theme-apollo/tree/master/packages/gatsby-theme-apollo-docs)
+and [Apollo's Docs Theme for Gatsby](https://github.com/duan-jason/gatsby-theme-apollo/tree/master/packages/gatsby-theme-apollo-docs)
 .
 
 To contribute to these docs, you can add or edit the markdown & MDX files in the `docs/source` directory.
 
 To build and run the documentation site locally, you'll also need a clone of 
-the [apollographql/docs](https://github.com/apollographql/docs/) repository
+the [apollographql/docs](https://github.com/duan-jason/docs/) repository
 and run `npm run start:router` from there, after following 
-[installation instructions](https://github.com/apollographql/docs/#developing-locally).
+[installation instructions](https://github.com/duan-jason/docs/#developing-locally).
 
 This will start up a development server with live reload enabled. You can see the docs by
 opening [localhost:8888](http://localhost:8888) in your browser.
 
 ### Adding a new page to the documentation
 
-If you're interested in adding new pages, head over to [the creating pages section](https://github.com/apollographql/gatsby-theme-apollo/tree/master/packages/gatsby-theme-apollo-docs#creating-pages).
+If you're interested in adding new pages, head over to [the creating pages section](https://github.com/duan-jason/gatsby-theme-apollo/tree/master/packages/gatsby-theme-apollo-docs#creating-pages).
 
 ### Documentation sidebar
 
-To see how the sidebar is built and how pages are grouped and named, see [this section](https://github.com/apollographql/gatsby-theme-apollo/tree/master/packages/gatsby-theme-apollo-docs#sidebarcategories) of the gatsby-theme-apollo-docs docs.
+To see how the sidebar is built and how pages are grouped and named, see [this section](https://github.com/duan-jason/gatsby-theme-apollo/tree/master/packages/gatsby-theme-apollo-docs#sidebarcategories) of the gatsby-theme-apollo-docs docs.
 
 ## Pipelines
 
@@ -125,7 +125,7 @@ for any successful open collaboration.
 
 Don't be a bad actor.
 
-[code of conduct]: https://github.com/apollographql/.github/blob/main/CODE_OF_CONDUCT.md
+[code of conduct]: https://github.com/duan-jason/.github/blob/main/CODE_OF_CONDUCT.md
 
 ### Code review guidelines
 
@@ -137,4 +137,4 @@ It’s important that every piece of code in Apollo packages is reviewed by at l
 4. **No unnecessary or unrelated changes.** PRs shouldn’t come with random formatting changes, especially in unrelated parts of the code. If there is some refactoring that needs to be done, it should be in a separate PR from a bug fix or feature, if possible.
 5. **Code has appropriate comments.** Code should be commented describing the problem it is solving, not just the technical implementation. Avoid unnecessary comments if the code speaks well enough for itself.
 
-<img src="https://raw.githubusercontent.com/apollographql/space-kit/main/src/illustrations/svgs/observatory.svg" width="100%" height="144">
+<img src="https://raw.githubusercontent.com/duan-jason/space-kit/main/src/illustrations/svgs/observatory.svg" width="100%" height="144">

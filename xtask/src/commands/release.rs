@@ -274,9 +274,9 @@ impl Prepare {
             );
             replace_in_file!(
                 "./apollo-router-scaffold/templates/base/xtask/Cargo.toml",
-                r#"^apollo-router-scaffold = \{\s*git\s*=\s*"https://github.com/apollographql/router.git",\s*tag\s*=\s*"v[^"]+"\s*\}$"#,
+                r#"^apollo-router-scaffold = \{\s*git\s*=\s*"https://github.com/duan-jason/router.git",\s*tag\s*=\s*"v[^"]+"\s*\}$"#,
                 format!(
-                    r#"apollo-router-scaffold = {{ git = "https://github.com/apollographql/router.git", tag = "v{resolved_version}" }}"#
+                    r#"apollo-router-scaffold = {{ git = "https://github.com/duan-jason/router.git", tag = "v{resolved_version}" }}"#
                 )
             );
         }
@@ -310,8 +310,8 @@ impl Prepare {
         );
         replace_in_file!(
             "./docs/source/containerization/kubernetes.mdx",
-            "https://github.com/apollographql/router/tree/[^/]+/helm/chart/router",
-            format!("https://github.com/apollographql/router/tree/v{version}/helm/chart/router")
+            "https://github.com/duan-jason/router/tree/[^/]+/helm/chart/router",
+            format!("https://github.com/duan-jason/router/tree/v{version}/helm/chart/router")
         );
         let helm_chart = String::from_utf8(
             std::process::Command::new(which::which("helm")?)
@@ -380,8 +380,8 @@ impl Prepare {
             {
                 replace_in_file!(
                     entry.path(),
-                    r#"^(?P<indentation>\s+)image:\s*ghcr.io/apollographql/router:v.*$"#,
-                    format!("${{indentation}}image: ghcr.io/apollographql/router:v{version}")
+                    r#"^(?P<indentation>\s+)image:\s*ghcr.io/duan-jason/router:v.*$"#,
+                    format!("${{indentation}}image: ghcr.io/duan-jason/router:v{version}")
                 );
             }
         }

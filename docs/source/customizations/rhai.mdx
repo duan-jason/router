@@ -310,7 +310,7 @@ Each hook in your Rhai script's [main file](#main-file) is passed a `service` ob
 
 ## Example scripts
 
-In addition to the examples below, see more examples in the Router repo's [examples directory](https://github.com/apollographql/router/tree/main/examples). Rhai-specific examples are listed in `README.md`.
+In addition to the examples below, see more examples in the Router repo's [examples directory](https://github.com/duan-jason/router/tree/main/examples). Rhai-specific examples are listed in `README.md`.
 
 ### Handling incoming requests
 
@@ -371,7 +371,7 @@ fn process_response(response) {
 
 ### Converting cookies to headers
 
-This example converts cookies into headers for transmission to subgraphs. There is a complete working example (with tests) of this in the [examples/cookies-to-headers directory](https://github.com/apollographql/router/tree/main/examples/cookies-to-headers).
+This example converts cookies into headers for transmission to subgraphs. There is a complete working example (with tests) of this in the [examples/cookies-to-headers directory](https://github.com/duan-jason/router/tree/main/examples/cookies-to-headers).
 
 ```rhai
 // Call map_request with our service and pass in a string with the name
@@ -434,4 +434,4 @@ If your router customization needs to do any of these, you can instead use [exte
 
 The Apollo Router requires that its Rhai engine implements the [sync feature](https://rhai.rs/book/start/features.html) to guarantee data integrity within the router's multi-threading execution environment. This means that [shared values](https://rhai.rs/book/language/fn-closure.html?highlight=deadlock#data-races-in-sync-builds-can-become-deadlocks) within Rhai might cause a deadlock.
 
-This is particularly risky when using closures within callbacks while referencing external data. Take particular care to avoid this kind of situation by making copies of data when required. The [examples/surrogate-cache-key directory](https://github.com/apollographql/router/tree/main/examples/surrogate-cache-key) contains an example of this, where "closing over" `response.headers` would cause a deadlock. To avoid this, a local copy of the required data is obtained and used in the closure.
+This is particularly risky when using closures within callbacks while referencing external data. Take particular care to avoid this kind of situation by making copies of data when required. The [examples/surrogate-cache-key directory](https://github.com/duan-jason/router/tree/main/examples/surrogate-cache-key) contains an example of this, where "closing over" `response.headers` would cause a deadlock. To avoid this, a local copy of the required data is obtained and used in the closure.

@@ -4,7 +4,7 @@ Release Checklist
 Nightly Releases
 ----------------
 
-As of the introduction of [PR #2409](https://github.com/apollographql/router/pull/2409), nightly releases are automatically built on a daily basis.  This is accomplished automatically through use of a parameterized invocation of the [`nightly` workflow](https://github.com/apollographql/router/blob/HEAD/.circleci/config.yml#L704-L711) using [CircleCI's Scheduled Pipelines](https://circleci.com/docs/scheduled-pipelines/) feature.
+As of the introduction of [PR #2409](https://github.com/duan-jason/router/pull/2409), nightly releases are automatically built on a daily basis.  This is accomplished automatically through use of a parameterized invocation of the [`nightly` workflow](https://github.com/duan-jason/router/blob/HEAD/.circleci/config.yml#L704-L711) using [CircleCI's Scheduled Pipelines](https://circleci.com/docs/scheduled-pipelines/) feature.
 
 ### One-off builds
 
@@ -14,7 +14,7 @@ This process can only be done by members of the Apollo Router `router` GitHub re
 
 To invoke a one-off `nightly` build:
 
-1. Go to the CircleCI Pipelines view for this repository](https://app.circleci.com/pipelines/github/apollographql/router)
+1. Go to the CircleCI Pipelines view for this repository](https://app.circleci.com/pipelines/github/duan-jason/router)
 2. Click on the **"All Branches"** drop-down menu and choose a branch you'd like to build from.
 3. Press the **"Trigger Pipeline"** button in the top-right of the navigation (to the left of the "Project Settings" button).
 4. Expand the "Add Parameters" section.
@@ -80,7 +80,7 @@ in lieu of an official changelog.
   - run 
   ```helm template --set router.configuration.telemetry.metrics.prometheus.enabled=true  --set managedFederation.apiKey="REDACTED" --set managedFederation.graphRef="REDACTED" --debug .```
   - Paste the output in the `Kubernetes Configuration` example of the `docs/source/containerization/kubernetes.mdx` file
-9. Update `federation-version-support.mdx` with the latest version info. Use https://github.com/apollographql/version_matrix to generate the version matrix.
+9. Update `federation-version-support.mdx` with the latest version info. Use https://github.com/duan-jason/version_matrix to generate the version matrix.
 10. Update the `image` of the Docker image within `docker-compose*.yml` files inside the `dockerfiles` directory.
 11. Update the license list with `cargo xtask licenses`.
     (If not installed, you can install `cargo-about` by running `cargo install cargo-about`.)
@@ -120,7 +120,7 @@ platforms, and creates a new GitHub release for that tag.
 ### Edit the release
 
 After CI builds the release binaries, a new release will appear on the
-[releases page](https://github.com/apollographql/router/releases), click
+[releases page](https://github.com/duan-jason/router/releases), click
 `Edit`, update the release notes, and save the changes to the release.
 
 #### If this is a stable release (not a release candidate)
@@ -141,7 +141,7 @@ After CI builds the release binaries, a new release will appear on the
     ```markdown
     This beta release is now out of date. If you previously installed this
     release, you should reinstall and see what's changed in the latest
-    [release](https://github.com/apollographql/router/releases).
+    [release](https://github.com/duan-jason/router/releases).
     ```
 
     The new release candidate should then include updated testing instructions

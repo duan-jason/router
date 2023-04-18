@@ -331,7 +331,7 @@ where
         .layer(Extension(service_factory))
         .layer(cors)
         // Compress the response body, except for multipart responses such as with `@defer`.
-        // This is a work-around for https://github.com/apollographql/router/issues/1572
+        // This is a work-around for https://github.com/duan-jason/router/issues/1572
         .layer(CompressionLayer::new().compress_when(
             DefaultPredicate::new().and(NotForContentType::const_new("multipart/")),
         ));

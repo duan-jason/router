@@ -1,6 +1,6 @@
-<a href="#"><img src="https://raw.githubusercontent.com/apollographql/space-kit/main/src/illustrations/svgs/satellite1.svg" width="100%" height="144"></a>
+<a href="#"><img src="https://raw.githubusercontent.com/duan-jason/space-kit/main/src/illustrations/svgs/satellite1.svg" width="100%" height="144"></a>
 
-[![CircleCI](https://circleci.com/gh/apollographql/router/tree/main.svg?style=shield)](https://circleci.com/gh/apollographql/router/tree/main)
+[![CircleCI](https://circleci.com/gh/duan-jason/router/tree/main.svg?style=shield)](https://circleci.com/gh/duan-jason/router/tree/main)
 
 # Apollo Router
 
@@ -8,7 +8,7 @@ The **Apollo Router** is a configurable, high-performance **graph router** writt
 
 Apollo Router is well-tested, regularly benchmarked, includes most major features of Apollo Gateway and is able to serve production-scale workloads. Please note that the (pre-1.0) version is not yet "semver stable" and we may still make breaking changes. Generally speaking, we expect most breaking changes to be on the plugin API and the configuration file format. We will clearly convey such changes in the release notes.
 
-New releases and their release notes (along with notes about any breaking changes) can be found on the [Releases](https://github.com/apollographql/router/releases) page, and the latest release can always be found [on the latest page](https://github.com/apollographql/router/releases/latest). The `CHANGELOG.md` at the root of this repository also contains _unreleased_ changes in addition to the full history of changes.
+New releases and their release notes (along with notes about any breaking changes) can be found on the [Releases](https://github.com/duan-jason/router/releases) page, and the latest release can always be found [on the latest page](https://github.com/duan-jason/router/releases/latest). The `CHANGELOG.md` at the root of this repository also contains _unreleased_ changes in addition to the full history of changes.
 
 Currently, we're publishing new releases every 1-2 weeks.
 
@@ -72,7 +72,7 @@ SUBCOMMANDS:
 
 * [Apollo Studio](https://www.apollographql.com/studio/develop/) – A free, end-to-end platform for managing your GraphQL lifecycle. Track your GraphQL schemas in a hosted registry to create a source of truth for everything in your graph. Studio provides an IDE (Apollo Explorer) so you can explore data, collaborate on queries, observe usage, and safely make schema changes.
 * [Apollo Federation](https://www.apollographql.com/apollo-federation) – The industry-standard open architecture for building a distributed graph. Compose and manage your graphs using [Rover](https://www.apollographql.com/rover/) and then use Apollo Router to query plan and route requests across multiple subgraphs.
-* [Apollo Client](https://www.apollographql.com/apollo-client/) – The most popular GraphQL client for the web. Apollo also builds and maintains [Apollo iOS](https://github.com/apollographql/apollo-ios) and [Apollo Android](https://github.com/apollographql/apollo-android).
+* [Apollo Client](https://www.apollographql.com/apollo-client/) – The most popular GraphQL client for the web. Apollo also builds and maintains [Apollo iOS](https://github.com/duan-jason/apollo-ios) and [Apollo Android](https://github.com/duan-jason/apollo-android).
 * [Apollo Server](https://www.apollographql.com/docs/apollo-server/) – A production-ready JavaScript GraphQL server that connects to any microservice, API, or database. Compatible with all popular JavaScript frameworks and deployable in serverless environments.
 
 ## Learn how to build with Apollo

@@ -208,7 +208,7 @@ pub(crate) struct Config {
     all: Option<SubgraphShaping>,
     /// Applied on specific subgraphs
     subgraphs: HashMap<String, SubgraphShaping>,
-    /// DEPRECATED, now always enabled: Enable variable deduplication optimization when sending requests to subgraphs (https://github.com/apollographql/router/issues/87)
+    /// DEPRECATED, now always enabled: Enable variable deduplication optimization when sending requests to subgraphs (https://github.com/duan-jason/router/issues/87)
     deduplicate_variables: Option<bool>,
     /// Experimental URLs of Redis cache used for subgraph response caching
     pub(crate) experimental_cache: Option<RedisCache>,

@@ -35,8 +35,8 @@ RUN apt-get -y install \
     ca-certificates 
 
 # Set labels for our image
-LABEL org.opencontainers.image.authors="Apollo Graph, Inc. https://github.com/apollographql/router"
-LABEL org.opencontainers.image.source="https://github.com/apollographql/router"
+LABEL org.opencontainers.image.authors="Apollo Graph, Inc. https://github.com/duan-jason/router"
+LABEL org.opencontainers.image.source="https://github.com/duan-jason/router"
 
 # Copy in the required files from our build image
 COPY --from=build --chown=root:root /dist /dist

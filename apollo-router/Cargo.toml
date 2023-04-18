@@ -2,7 +2,7 @@
 name = "apollo-router"
 version = "1.15.1"
 authors = ["Apollo Graph, Inc. <packages@apollographql.com>"]
-repository = "https://github.com/apollographql/router/"
+repository = "https://github.com/duan-jason/router/"
 documentation = "https://docs.rs/apollo-router"
 description = "A configurable, high-performance routing runtime for Apollo Federation 🚀"
 license = "Elastic-2.0"
@@ -29,7 +29,7 @@ failfast = []
 # RUSTFLAGS="--cfg tokio_unstable"
 console = ["tokio/tracing", "console-subscriber"]
 # "fake" feature to disable V8 usage when building on docs.rs
-# See https://github.com/apollographql/federation-rs/pull/185
+# See https://github.com/duan-jason/federation-rs/pull/185
 docs_rs = ["router-bridge/docs_rs"]
 default = []
 
@@ -111,11 +111,11 @@ once_cell = "1.16.0"
 # the `opentelemetry-tracing` package.
 #
 # We are constrained in our ability to update the `tracing` packages and that is
-# tracked in https://github.com/apollographql/router/issues/1407.
+# tracked in https://github.com/duan-jason/router/issues/1407.
 #
 # To codify this with code, a rule in our Renovate configuration constraints and
 # groups `^tracing` and `^opentelemetry*` dependencies together as of
-# https://github.com/apollographql/router/pull/1509.  A comment which exists
+# https://github.com/duan-jason/router/pull/1509.  A comment which exists
 # there (and on `tracing` packages below) should be updated should this change.
 opentelemetry = { version = "0.18.0", features = [
     "rt-tokio",

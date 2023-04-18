@@ -52,7 +52,7 @@ impl Config {
         &self,
     ) -> Result<T, BoxError> {
         let endpoint = match (self.endpoint.clone(), &self.protocol) {
-            // # https://github.com/apollographql/router/issues/2036
+            // # https://github.com/duan-jason/router/issues/2036
             // Opentelemetry rust incorrectly defaults to https
             // This will override the defaults to that of the spec
             // https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/protocol/exporter.md

@@ -532,7 +532,7 @@ mod tests {
         }
     }
 
-    // test for https://github.com/apollographql/federation/pull/1769
+    // test for https://github.com/duan-jason/federation/pull/1769
     #[test]
     fn inaccessible_on_non_core() {
         let schema = include_str!("../testdata/inaccessible_on_non_core.graphql");
@@ -554,7 +554,7 @@ GraphQL request:42:1
         };
     }
 
-    // https://github.com/apollographql/router/issues/2269
+    // https://github.com/duan-jason/router/issues/2269
     #[test]
     fn unclosed_brace_error_does_not_panic() {
         let schema = "schema {";

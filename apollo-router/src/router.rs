@@ -64,7 +64,7 @@ use crate::uplink::Endpoints;
 // TODO: Check with simon once the refactor is complete
 #[allow(unused)]
 // Later we might add a public API for this (probably a builder similar to `test_harness.rs`),
-// see https://github.com/apollographql/router/issues/1496.
+// see https://github.com/duan-jason/router/issues/1496.
 // In the meantime keeping this function helps make sure it still compiles.
 async fn make_router_service<RF>(
     schema: &str,

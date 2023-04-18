@@ -35,11 +35,11 @@ The convention used in this directory and obeyed by the `cargo xtask changeset c
 5. Other files not matching the above convention will be ignored, including this `README.md`.
 6. The files must use the following format:
 
-       ### Brief but complete sentence that stands on its own ([Issue #ISSUE_NUMBER](https://github.com/apollographql/router/issues/ISSUE_NUMBER))
+       ### Brief but complete sentence that stands on its own ([Issue #ISSUE_NUMBER](https://github.com/duan-jason/router/issues/ISSUE_NUMBER))
 
        A description of the fix which stands on its own separate from the title.  It should embrace the use of Markdown to stylize the commentary so it looks great on the GitHub Releases, when shared on social cards, etc.
 
-       By [@USERNAME](https://github.com/USERNAME) in https://github.com/apollographql/router/pull/PULL_NUMBER
+       By [@USERNAME](https://github.com/USERNAME) in https://github.com/duan-jason/router/pull/PULL_NUMBER
 
      Note the key components:
 

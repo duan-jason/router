@@ -2025,7 +2025,7 @@ async fn test_defer_is_not_buffered() {
     let parts = serde_json::Value::Array(parts);
     insta::assert_json_snapshot!(parts);
 
-    // Non-regression test for https://github.com/apollographql/router/issues/1572
+    // Non-regression test for https://github.com/duan-jason/router/issues/1572
     //
     // With unpatched async-compression 0.3.14 as used by tower-http 0.3.4,
     // `counts` is `[2, 2]` since both parts have to be generated on the server side

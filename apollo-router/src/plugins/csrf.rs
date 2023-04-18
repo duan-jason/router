@@ -63,7 +63,7 @@ static NON_PREFLIGHTED_CONTENT_TYPES: &[&str] = &[
 /// The Csrf plugin makes sure any request received would have been preflighted if it was sent by a browser.
 ///
 /// Quoting the [great apollo server comment](
-/// https://github.com/apollographql/apollo-server/blob/12bf5fc8ef305caa6a8848e37f862d32dae5957f/packages/server/src/preventCsrf.ts#L26):
+/// https://github.com/duan-jason/apollo-server/blob/12bf5fc8ef305caa6a8848e37f862d32dae5957f/packages/server/src/preventCsrf.ts#L26):
 ///
 /// We don't want random websites to be able to execute actual GraphQL operations
 /// from a user's browser unless our CORS policy supports it. It's not good
@@ -163,7 +163,7 @@ fn content_type_requires_preflight(headers: &HeaderMap) -> bool {
             // The mime type parser we're using is a bit askew,
             // so we're going to perform a bit of trimming, and character replacement
             // before we combine the header values
-            // https://github.com/apollographql/router/pull/1006#discussion_r869777439
+            // https://github.com/duan-jason/router/pull/1006#discussion_r869777439
             header_value
                 .to_str()
                 .map(|as_str| as_str.trim().replace('\u{0009}', "\u{0020}")) // replace tab with space

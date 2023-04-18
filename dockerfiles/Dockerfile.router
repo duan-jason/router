@@ -30,8 +30,8 @@ RUN mkdir config schema
 # Copy configuration for docker image
 COPY dockerfiles/router.yaml config
 
-LABEL org.opencontainers.image.authors="Apollo Graph, Inc. https://github.com/apollographql/router"
-LABEL org.opencontainers.image.source="https://github.com/apollographql/router"
+LABEL org.opencontainers.image.authors="Apollo Graph, Inc. https://github.com/duan-jason/router"
+LABEL org.opencontainers.image.source="https://github.com/duan-jason/router"
 
 ENV APOLLO_ROUTER_CONFIG_PATH="/dist/config/router.yaml"
 

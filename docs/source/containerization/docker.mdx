@@ -15,7 +15,7 @@ Note: The exact image version to use is your choice depending on which release y
 
 ## Override the configuration
 
-Our default Docker images include a basic configuration which can be seen [in our repository](https://github.com/apollographql/router/blob/main/dockerfiles/router.yaml).  Inside the container, this file is located at `/dist/config/router.yaml`.
+Our default Docker images include a basic configuration which can be seen [in our repository](https://github.com/duan-jason/router/blob/main/dockerfiles/router.yaml).  Inside the container, this file is located at `/dist/config/router.yaml`.
 
 If you wish to override the default configuration, it is important to consider and preserve aspects of the default configuration.  In particular, it is generally important for the Router to bind to the special "listening address" of `0.0.0.0` (i.e., "all interfaces") to ensure the Router is exposed on a the network interface accessible outside of the local container; without this configuration, the Router will only listen on `localhost`.
 
@@ -27,7 +27,7 @@ docker run -p 4000:4000 \
   --env APOLLO_KEY="<your key>" \
   --mount "type=bind,source=/home/user/router.yaml,target=/dist/config/router.yaml" \
   --rm \
-  ghcr.io/apollographql/router:<image version>
+  ghcr.io/duan-jason/router:<image version>
 ```
 
 > Note: Both local and container paths must be specified as absolute paths.
@@ -43,7 +43,7 @@ docker run -p 4000:4000 \
   --env APOLLO_GRAPH_REF="<your graph>" \
   --env APOLLO_KEY="<your key>" \
   --rm \
-  ghcr.io/apollographql/router:<image version> --log debug
+  ghcr.io/duan-jason/router:<image version> --log debug
 ```
 
 ## Debugging your container
@@ -59,7 +59,7 @@ docker run -p 4000:4000 \
   --interactive \
   --tty \
   --entrypoint=bash \
-  ghcr.io/apollographql/router:<image version>
+  ghcr.io/duan-jason/router:<image version>
 dist# pwd
 /dist
 dist# ls
@@ -78,7 +78,7 @@ docker run -p 4000:4000 \
   --env APOLLO_KEY="<your key>" \
   --mount "type=bind,source=/data,target=/dist/data"
   --rm \
-  ghcr.io/apollographql/router:<image version>-debug
+  ghcr.io/duan-jason/router:<image version>-debug
 ```
 
 The router will run under the control of heaptrack. The heaptrack output will be saved to the /data directory. The output can be analyzed directly using `heaptrack_gui` or `heaptrack_print` or shared with Apollo support staff.
@@ -91,7 +91,7 @@ If we don't want to use uplink to retrieve our subgraph, we can manually specify
 docker run -p 4000:4000 \
   --mount "type=bind,source=/docker.graphql,target=/dist/schema/local.graphql" \
   --rm \
-  ghcr.io/apollographql/router:<image version> -c config/router.yaml -s schema/local.graphql
+  ghcr.io/duan-jason/router:<image version> -c config/router.yaml -s schema/local.graphql
 ```
 
 Note: In this example we have to mount the local definition of the supergraph into our image AND specify the location of the file. It doesn't have to be mounted in the /dist/schema directory, but it's a reasonable location to use. We must specify the configuration file location as well, since overriding the default params will override our default config file location. In this case, since we don't want to change our router configuration but want to make sure it's used, we just specify the default location of the default configuration.

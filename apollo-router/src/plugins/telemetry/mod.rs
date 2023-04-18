@@ -1205,7 +1205,7 @@ impl Telemetry {
         }
     }
 
-    // https://github.com/apollographql/apollo-server/blob/6ff88e87c52/packages/server/src/plugin/usageReporting/stats.ts#L283
+    // https://github.com/duan-jason/apollo-server/blob/6ff88e87c52/packages/server/src/plugin/usageReporting/stats.ts#L283
     fn per_type_stat(
         traces: &[(ByteString, proto::reports::Trace)],
         field_level_instrumentation_ratio: f64,

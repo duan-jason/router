@@ -18,6 +18,6 @@ jobs:
           # set of repositories that affect the Polaris team.  This allows them to
           # be updated in a single place.  If you want a NEW repo to work, you'll
           # need an org admin to add it as a repo to (both) the existing secrets.
-          # https://github.com/organizations/apollographql/settings/secrets/actions
+          # https://github.com/organizations/duan-jason/settings/secrets/actions
           api_url: ${{ secrets.POLARIS_TAGGER_API_URL }}
           bearer_token: ${{ secrets.POLARIS_TAGGER_BEARER_TOKEN }}

@@ -352,7 +352,7 @@ print(`${request.body.query}`); // Log the query string after modification
 
 This is the name of the GraphQL operation to execute, if a name is provided in the request. This value _must_ be present if `request.body.query` contains more than one operation definition.
 
-For an example of interacting with `operation_name`, see the [examples/op-name-to-header directory](https://github.com/apollographql/router/tree/main/examples/op-name-to-header).
+For an example of interacting with `operation_name`, see the [examples/op-name-to-header directory](https://github.com/duan-jason/router/tree/main/examples/op-name-to-header).
 
 ```rhai
 print(`${request.body.operation_name}`); // Log the operation_name before modification
@@ -449,7 +449,7 @@ print(`${response.body.label}`); // logs the response label
 
 A response may contain data (some responses with errors do not contain data). Be careful when manipulating data (and errors) to make sure that response remain valid. `data` is exposed to Rhai as an [Object Map](https://rhai.rs/book/language/object-maps.html).
 
-There is a complete example of interacting with the response data in the [examples/data-response-mutate directory](https://github.com/apollographql/router/tree/main/examples/data-response-mutate).
+There is a complete example of interacting with the response data in the [examples/data-response-mutate directory](https://github.com/duan-jason/router/tree/main/examples/data-response-mutate).
 
 ```rhai
 print(`${response.body.data}`); // logs the response data
@@ -467,7 +467,7 @@ Each Error must contain at least:
 
 Optionally, an error may also contain extensions, which are represented as an Object Map.
 
-There is a complete example of interacting with the response errors in the [examples/error-response-mutate directory](https://github.com/apollographql/router/tree/main/examples/error-response-mutate).
+There is a complete example of interacting with the response errors in the [examples/error-response-mutate directory](https://github.com/duan-jason/router/tree/main/examples/error-response-mutate).
 
 ```rhai
 // Create an error with our message

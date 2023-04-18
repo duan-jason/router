@@ -4,7 +4,7 @@ title: Containerizing the Apollo Router
 
 import ElasticNotice from '../../shared/elastic-notice.mdx';
 
-> More details about Apollo Router images are available [on GitHub](https://github.com/apollographql/router/pkgs/container/router).
+> More details about Apollo Router images are available [on GitHub](https://github.com/duan-jason/router/pkgs/container/router).
 
 Each release of the Apollo Router includes both default and debug images. Each image for a release contains the same build. Debug images have helpful debugging utilities installed and run the router under the control of heaptrack (https://github.com/KDE/heaptrack).
 
@@ -17,7 +17,7 @@ docker run -p 4000:4000 \
   --env APOLLO_GRAPH_REF="<your graph>" \
   --env APOLLO_KEY="<your key>" \
   --rm \
-  ghcr.io/apollographql/router:<image version>
+  ghcr.io/duan-jason/router:<image version>
 ```
 
 This command downloads your supergraph schema from Apollo and uses a default configuration that listens for connections on port `4000`.
