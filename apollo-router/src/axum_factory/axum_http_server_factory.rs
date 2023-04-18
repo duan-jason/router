@@ -235,7 +235,7 @@ impl HttpServerFactory for AxumHttpServerFactory {
             );
 
             tracing::info!(
-                "GraphQL endpoint exposed at {}{} 🚀",
+                "Hello, GraphQL endpoint exposed at {}{} 🚀",
                 actual_main_listen_address,
                 configuration.supergraph.path
             );
