@@ -36,6 +36,7 @@ pub(crate) mod layer;
 pub(crate) mod otlp;
 pub(crate) mod prometheus;
 pub(crate) mod span_metrics_exporter;
+pub(crate) mod custom_aggregator;
 
 pub(crate) const METRIC_PREFIX_MONOTONIC_COUNTER: &str = "monotonic_counter.";
 pub(crate) const METRIC_PREFIX_COUNTER: &str = "counter.";
