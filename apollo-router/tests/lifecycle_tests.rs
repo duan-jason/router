@@ -1,6 +1,6 @@
 use std::time::Duration;
 
-use apollo_router::graphql;
+use uhg_custom_appollo_roouter::graphql;
 use futures::FutureExt;
 use serde_json::json;
 use tower::BoxError;

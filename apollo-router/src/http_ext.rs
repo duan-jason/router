@@ -33,7 +33,7 @@ use crate::graphql;
 ///
 /// ```
 /// # fn main() -> Result<(), tower::BoxError> {
-/// use apollo_router::services::supergraph;
+/// use uhg_custom_appollo_roouter::services::supergraph;
 /// let request = supergraph::Request::fake_builder()
 ///     .header("accept-encoding", "gzip")
 ///     // Other parameters
@@ -60,7 +60,7 @@ pub struct TryIntoHeaderName {
 ///
 /// ```
 /// # fn main() -> Result<(), tower::BoxError> {
-/// use apollo_router::services::supergraph;
+/// use uhg_custom_appollo_roouter::services::supergraph;
 /// let request = supergraph::Request::fake_builder()
 ///     .header("accept-encoding", "gzip")
 ///     // Other parameters

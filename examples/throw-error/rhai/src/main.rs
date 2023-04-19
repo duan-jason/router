@@ -12,8 +12,8 @@ fn main() -> Result<()> {
 
 #[cfg(test)]
 mod tests {
-    use apollo_router::services::supergraph;
-    use apollo_router::Context;
+    use uhg_custom_appollo_roouter::services::supergraph;
+    use uhg_custom_appollo_roouter::Context;
     use http::StatusCode;
     use serde_json::json;
     use tower::ServiceExt;

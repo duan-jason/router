@@ -1,8 +1,8 @@
 #[cfg(all(target_os = "linux", target_arch = "x86_64", test))]
 mod test {
-    use apollo_router::services::execution::QueryPlan;
-    use apollo_router::services::router;
-    use apollo_router::services::supergraph;
+    use uhg_custom_appollo_roouter::services::execution::QueryPlan;
+    use uhg_custom_appollo_roouter::services::router;
+    use uhg_custom_appollo_roouter::services::supergraph;
     use futures::StreamExt;
     use http::Method;
     use redis::AsyncCommands;

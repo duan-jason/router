@@ -93,7 +93,7 @@ pub(crate) struct MetricsCommon {
     pub(crate) resources: HashMap<String, String>,
     #[serde(default)]
     /// buckets
-    pub(crate) buckets: HashMap<String, Vec<f64>>,
+    pub(crate) buckets: Option<HashMap<String, Vec<f64>>>,
 }
 
 /// Tracing configuration

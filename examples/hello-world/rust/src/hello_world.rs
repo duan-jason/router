@@ -1,9 +1,9 @@
-use apollo_router::plugin::Plugin;
-use apollo_router::plugin::PluginInit;
-use apollo_router::register_plugin;
-use apollo_router::services::execution;
-use apollo_router::services::subgraph;
-use apollo_router::services::supergraph;
+use uhg_custom_appollo_roouter::plugin::Plugin;
+use uhg_custom_appollo_roouter::plugin::PluginInit;
+use uhg_custom_appollo_roouter::register_plugin;
+use uhg_custom_appollo_roouter::services::execution;
+use uhg_custom_appollo_roouter::services::subgraph;
+use uhg_custom_appollo_roouter::services::supergraph;
 use schemars::JsonSchema;
 use serde::Deserialize;
 use tower::BoxError;

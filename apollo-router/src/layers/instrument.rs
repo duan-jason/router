@@ -5,7 +5,7 @@
 //! # use tower::ServiceBuilder;
 //! # use tower_service::Service;
 //! # use tracing::info_span;
-//! # use apollo_router::layers::ServiceBuilderExt;
+//! # use uhg_custom_appollo_roouter::layers::ServiceBuilderExt;
 //! # fn test<T>(service: impl Service<T>) {
 //! let instrumented = ServiceBuilder::new()
 //!             .instrument(|_request| info_span!("query_planning"))

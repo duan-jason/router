@@ -4415,8 +4415,8 @@ Migration example:
 ```diff
 -use tower::util::BoxService;
 -use tower::BoxError;
--use apollo_router::services::{RouterRequest, RouterResponse};
-+use apollo_router::services::router;
+-use uhg_custom_appollo_roouter::services::{RouterRequest, RouterResponse};
++use uhg_custom_appollo_roouter::services::router;
 
 -async fn example(service: BoxService<RouterRequest, RouterResponse, BoxError>) -> RouterResponse {
 +async fn example(service: router::BoxService) -> router::Response {
@@ -4491,9 +4491,9 @@ Since the only possible variation was specifying _when_ the server should shut d
 (with a `ShutdownSource` parameter) the `router_builder_fn` was replaced with a new `shutdown` method.
 
 ```diff
- use apollo_router::Executable;
--use apollo_router::RouterHttpServer;
- use apollo_router::ShutdownSource;
+ use uhg_custom_appollo_roouter::Executable;
+-use uhg_custom_appollo_roouter::RouterHttpServer;
+ use uhg_custom_appollo_roouter::ShutdownSource;
 
  Executable::builder()
 -    .router_builder_fn(|configuration, schema| RouterHttpServer::builder()
@@ -4535,15 +4535,15 @@ To help the transition, type aliases were left at the old location with a deprec
 These aliases are now removed and remaining imports must be changed to the new locations:
 
 ```diff
--use apollo_router::Error;
--use apollo_router::Request;
--use apollo_router::Response;
-+use apollo_router::graphql::Error;
-+use apollo_router::graphql::Request;
-+use apollo_router::graphql::Response;
+-use uhg_custom_appollo_roouter::Error;
+-use uhg_custom_appollo_roouter::Request;
+-use uhg_custom_appollo_roouter::Response;
++use uhg_custom_appollo_roouter::graphql::Error;
++use uhg_custom_appollo_roouter::graphql::Request;
++use uhg_custom_appollo_roouter::graphql::Response;
 ```
 
-Alternatively, import the module with `use apollo_router::graphql`
+Alternatively, import the module with `use uhg_custom_appollo_roouter::graphql`
 then use qualified paths such as `graphql::Request`.
 This can help disambiguate when multiple types share a name.
 
@@ -5238,10 +5238,10 @@ By [@garypen](https://github.com/garypen) in https://github.com/apollographql/ro
 For example, here are the changes made to `examples/add-timestamp-header/src/main.rs`:
 
 ```diff
--use apollo_router::{plugin::utils, Plugin, RouterRequest, RouterResponse};
-+use apollo_router::plugin::test;
-+use apollo_router::plugin::Plugin;
-+use apollo_router::services::{RouterRequest, RouterResponse};
+-use uhg_custom_appollo_roouter::{plugin::utils, Plugin, RouterRequest, RouterResponse};
++use uhg_custom_appollo_roouter::plugin::test;
++use uhg_custom_appollo_roouter::plugin::Plugin;
++use uhg_custom_appollo_roouter::services::{RouterRequest, RouterResponse};
 ```
 ```diff
 -let mut mock = utils::test::MockRouterService::new();
@@ -5262,133 +5262,133 @@ unfold the listing below and use your browser's search function (CTRL+F or ⌘+F
   Output of <code>./scripts/public_items.sh</code> for 0.10.0
 </summary>
 <pre>
-use apollo_router::ApolloRouter;
-use apollo_router::Configuration;
-use apollo_router::ConfigurationKind;
-use apollo_router::Context;
-use apollo_router::Error;
-use apollo_router::Executable;
-use apollo_router::Request;
-use apollo_router::Response;
-use apollo_router::Schema;
-use apollo_router::SchemaKind;
-use apollo_router::ShutdownKind;
-use apollo_router::error::CacheResolverError;
-use apollo_router::error::FetchError;
-use apollo_router::error::JsonExtError;
-use apollo_router::error::Location;
-use apollo_router::error::ParseErrors;
-use apollo_router::error::PlannerErrors;
-use apollo_router::error::QueryPlannerError;
-use apollo_router::error::SchemaError;
-use apollo_router::error::ServiceBuildError;
-use apollo_router::error::SpecError;
-use apollo_router::graphql::Error;
-use apollo_router::graphql::NewErrorBuilder;
-use apollo_router::graphql::Request;
-use apollo_router::graphql::Response;
-use apollo_router::json_ext::Object;
-use apollo_router::json_ext::Path;
-use apollo_router::json_ext::PathElement;
-use apollo_router::layers::ServiceBuilderExt;
-use apollo_router::layers::ServiceExt;
-use apollo_router::layers::async_checkpoint::AsyncCheckpointLayer;
-use apollo_router::layers::async_checkpoint::AsyncCheckpointService;
-use apollo_router::layers::cache::CachingLayer;
-use apollo_router::layers::cache::CachingService;
-use apollo_router::layers::instrument::InstrumentLayer;
-use apollo_router::layers::instrument::InstrumentService;
-use apollo_router::layers::map_future_with_context::MapFutureWithContextLayer;
-use apollo_router::layers::map_future_with_context::MapFutureWithContextService;
-use apollo_router::layers::sync_checkpoint::CheckpointLayer;
-use apollo_router::layers::sync_checkpoint::CheckpointService;
-use apollo_router::main;
-use apollo_router::mock_service;
-use apollo_router::plugin::DynPlugin;
-use apollo_router::plugin::Handler;
-use apollo_router::plugin::Plugin;
-use apollo_router::plugin::PluginFactory;
-use apollo_router::plugin::plugins;
-use apollo_router::plugin::register_plugin;
-use apollo_router::plugin::serde::deserialize_header_name;
-use apollo_router::plugin::serde::deserialize_header_value;
-use apollo_router::plugin::serde::deserialize_option_header_name;
-use apollo_router::plugin::serde::deserialize_option_header_value;
-use apollo_router::plugin::serde::deserialize_regex;
-use apollo_router::plugin::test::IntoSchema;
-use apollo_router::plugin::test::MockExecutionService;
-use apollo_router::plugin::test::MockQueryPlanningService;
-use apollo_router::plugin::test::MockRouterService;
-use apollo_router::plugin::test::MockSubgraph;
-use apollo_router::plugin::test::MockSubgraphService;
-use apollo_router::plugin::test::NewPluginTestHarnessBuilder;
-use apollo_router::plugin::test::PluginTestHarness;
-use apollo_router::plugins::csrf::CSRFConfig;
-use apollo_router::plugins::csrf::Csrf;
-use apollo_router::plugins::rhai::Conf;
-use apollo_router::plugins::rhai::Rhai;
-use apollo_router::plugins::telemetry::ROUTER_SPAN_NAME;
-use apollo_router::plugins::telemetry::Telemetry;
-use apollo_router::plugins::telemetry::apollo::Config;
-use apollo_router::plugins::telemetry::config::AttributeArray;
-use apollo_router::plugins::telemetry::config::AttributeValue;
-use apollo_router::plugins::telemetry::config::Conf;
-use apollo_router::plugins::telemetry::config::GenericWith;
-use apollo_router::plugins::telemetry::config::Metrics;
-use apollo_router::plugins::telemetry::config::MetricsCommon;
-use apollo_router::plugins::telemetry::config::Propagation;
-use apollo_router::plugins::telemetry::config::Sampler;
-use apollo_router::plugins::telemetry::config::SamplerOption;
-use apollo_router::plugins::telemetry::config::Trace;
-use apollo_router::plugins::telemetry::config::Tracing;
-use apollo_router::query_planner::OperationKind;
-use apollo_router::query_planner::QueryPlan;
-use apollo_router::query_planner::QueryPlanOptions;
-use apollo_router::register_plugin;
-use apollo_router::services::ErrorNewExecutionResponseBuilder;
-use apollo_router::services::ErrorNewQueryPlannerResponseBuilder;
-use apollo_router::services::ErrorNewRouterResponseBuilder;
-use apollo_router::services::ErrorNewSubgraphResponseBuilder;
-use apollo_router::services::ExecutionRequest;
-use apollo_router::services::ExecutionResponse;
-use apollo_router::services::ExecutionService;
-use apollo_router::services::FakeNewExecutionRequestBuilder;
-use apollo_router::services::FakeNewExecutionResponseBuilder;
-use apollo_router::services::FakeNewRouterRequestBuilder;
-use apollo_router::services::FakeNewRouterResponseBuilder;
-use apollo_router::services::FakeNewSubgraphRequestBuilder;
-use apollo_router::services::FakeNewSubgraphResponseBuilder;
-use apollo_router::services::NewExecutionRequestBuilder;
-use apollo_router::services::NewExecutionResponseBuilder;
-use apollo_router::services::NewExecutionServiceBuilder;
-use apollo_router::services::NewQueryPlannerRequestBuilder;
-use apollo_router::services::NewQueryPlannerResponseBuilder;
-use apollo_router::services::NewRouterRequestBuilder;
-use apollo_router::services::NewRouterResponseBuilder;
-use apollo_router::services::NewRouterServiceBuilder;
-use apollo_router::services::NewSubgraphRequestBuilder;
-use apollo_router::services::NewSubgraphResponseBuilder;
-use apollo_router::services::PluggableRouterServiceBuilder;
-use apollo_router::services::QueryPlannerContent;
-use apollo_router::services::QueryPlannerRequest;
-use apollo_router::services::QueryPlannerResponse;
-use apollo_router::services::ResponseBody;
-use apollo_router::services::RouterRequest;
-use apollo_router::services::RouterResponse;
-use apollo_router::services::RouterService;
-use apollo_router::services::SubgraphRequest;
-use apollo_router::services::SubgraphResponse;
-use apollo_router::services::SubgraphService;
-use apollo_router::services::http_ext::FakeNewRequestBuilder;
-use apollo_router::services::http_ext::IntoHeaderName;
-use apollo_router::services::http_ext::IntoHeaderValue;
-use apollo_router::services::http_ext::NewRequestBuilder;
-use apollo_router::services::http_ext::Request;
-use apollo_router::services::http_ext::Response;
-use apollo_router::subscriber::RouterSubscriber;
-use apollo_router::subscriber::is_global_subscriber_set;
-use apollo_router::subscriber::replace_layer;
-use apollo_router::subscriber::set_global_subscriber;
+use uhg_custom_appollo_roouter::ApolloRouter;
+use uhg_custom_appollo_roouter::Configuration;
+use uhg_custom_appollo_roouter::ConfigurationKind;
+use uhg_custom_appollo_roouter::Context;
+use uhg_custom_appollo_roouter::Error;
+use uhg_custom_appollo_roouter::Executable;
+use uhg_custom_appollo_roouter::Request;
+use uhg_custom_appollo_roouter::Response;
+use uhg_custom_appollo_roouter::Schema;
+use uhg_custom_appollo_roouter::SchemaKind;
+use uhg_custom_appollo_roouter::ShutdownKind;
+use uhg_custom_appollo_roouter::error::CacheResolverError;
+use uhg_custom_appollo_roouter::error::FetchError;
+use uhg_custom_appollo_roouter::error::JsonExtError;
+use uhg_custom_appollo_roouter::error::Location;
+use uhg_custom_appollo_roouter::error::ParseErrors;
+use uhg_custom_appollo_roouter::error::PlannerErrors;
+use uhg_custom_appollo_roouter::error::QueryPlannerError;
+use uhg_custom_appollo_roouter::error::SchemaError;
+use uhg_custom_appollo_roouter::error::ServiceBuildError;
+use uhg_custom_appollo_roouter::error::SpecError;
+use uhg_custom_appollo_roouter::graphql::Error;
+use uhg_custom_appollo_roouter::graphql::NewErrorBuilder;
+use uhg_custom_appollo_roouter::graphql::Request;
+use uhg_custom_appollo_roouter::graphql::Response;
+use uhg_custom_appollo_roouter::json_ext::Object;
+use uhg_custom_appollo_roouter::json_ext::Path;
+use uhg_custom_appollo_roouter::json_ext::PathElement;
+use uhg_custom_appollo_roouter::layers::ServiceBuilderExt;
+use uhg_custom_appollo_roouter::layers::ServiceExt;
+use uhg_custom_appollo_roouter::layers::async_checkpoint::AsyncCheckpointLayer;
+use uhg_custom_appollo_roouter::layers::async_checkpoint::AsyncCheckpointService;
+use uhg_custom_appollo_roouter::layers::cache::CachingLayer;
+use uhg_custom_appollo_roouter::layers::cache::CachingService;
+use uhg_custom_appollo_roouter::layers::instrument::InstrumentLayer;
+use uhg_custom_appollo_roouter::layers::instrument::InstrumentService;
+use uhg_custom_appollo_roouter::layers::map_future_with_context::MapFutureWithContextLayer;
+use uhg_custom_appollo_roouter::layers::map_future_with_context::MapFutureWithContextService;
+use uhg_custom_appollo_roouter::layers::sync_checkpoint::CheckpointLayer;
+use uhg_custom_appollo_roouter::layers::sync_checkpoint::CheckpointService;
+use uhg_custom_appollo_roouter::main;
+use uhg_custom_appollo_roouter::mock_service;
+use uhg_custom_appollo_roouter::plugin::DynPlugin;
+use uhg_custom_appollo_roouter::plugin::Handler;
+use uhg_custom_appollo_roouter::plugin::Plugin;
+use uhg_custom_appollo_roouter::plugin::PluginFactory;
+use uhg_custom_appollo_roouter::plugin::plugins;
+use uhg_custom_appollo_roouter::plugin::register_plugin;
+use uhg_custom_appollo_roouter::plugin::serde::deserialize_header_name;
+use uhg_custom_appollo_roouter::plugin::serde::deserialize_header_value;
+use uhg_custom_appollo_roouter::plugin::serde::deserialize_option_header_name;
+use uhg_custom_appollo_roouter::plugin::serde::deserialize_option_header_value;
+use uhg_custom_appollo_roouter::plugin::serde::deserialize_regex;
+use uhg_custom_appollo_roouter::plugin::test::IntoSchema;
+use uhg_custom_appollo_roouter::plugin::test::MockExecutionService;
+use uhg_custom_appollo_roouter::plugin::test::MockQueryPlanningService;
+use uhg_custom_appollo_roouter::plugin::test::MockRouterService;
+use uhg_custom_appollo_roouter::plugin::test::MockSubgraph;
+use uhg_custom_appollo_roouter::plugin::test::MockSubgraphService;
+use uhg_custom_appollo_roouter::plugin::test::NewPluginTestHarnessBuilder;
+use uhg_custom_appollo_roouter::plugin::test::PluginTestHarness;
+use uhg_custom_appollo_roouter::plugins::csrf::CSRFConfig;
+use uhg_custom_appollo_roouter::plugins::csrf::Csrf;
+use uhg_custom_appollo_roouter::plugins::rhai::Conf;
+use uhg_custom_appollo_roouter::plugins::rhai::Rhai;
+use uhg_custom_appollo_roouter::plugins::telemetry::ROUTER_SPAN_NAME;
+use uhg_custom_appollo_roouter::plugins::telemetry::Telemetry;
+use uhg_custom_appollo_roouter::plugins::telemetry::apollo::Config;
+use uhg_custom_appollo_roouter::plugins::telemetry::config::AttributeArray;
+use uhg_custom_appollo_roouter::plugins::telemetry::config::AttributeValue;
+use uhg_custom_appollo_roouter::plugins::telemetry::config::Conf;
+use uhg_custom_appollo_roouter::plugins::telemetry::config::GenericWith;
+use uhg_custom_appollo_roouter::plugins::telemetry::config::Metrics;
+use uhg_custom_appollo_roouter::plugins::telemetry::config::MetricsCommon;
+use uhg_custom_appollo_roouter::plugins::telemetry::config::Propagation;
+use uhg_custom_appollo_roouter::plugins::telemetry::config::Sampler;
+use uhg_custom_appollo_roouter::plugins::telemetry::config::SamplerOption;
+use uhg_custom_appollo_roouter::plugins::telemetry::config::Trace;
+use uhg_custom_appollo_roouter::plugins::telemetry::config::Tracing;
+use uhg_custom_appollo_roouter::query_planner::OperationKind;
+use uhg_custom_appollo_roouter::query_planner::QueryPlan;
+use uhg_custom_appollo_roouter::query_planner::QueryPlanOptions;
+use uhg_custom_appollo_roouter::register_plugin;
+use uhg_custom_appollo_roouter::services::ErrorNewExecutionResponseBuilder;
+use uhg_custom_appollo_roouter::services::ErrorNewQueryPlannerResponseBuilder;
+use uhg_custom_appollo_roouter::services::ErrorNewRouterResponseBuilder;
+use uhg_custom_appollo_roouter::services::ErrorNewSubgraphResponseBuilder;
+use uhg_custom_appollo_roouter::services::ExecutionRequest;
+use uhg_custom_appollo_roouter::services::ExecutionResponse;
+use uhg_custom_appollo_roouter::services::ExecutionService;
+use uhg_custom_appollo_roouter::services::FakeNewExecutionRequestBuilder;
+use uhg_custom_appollo_roouter::services::FakeNewExecutionResponseBuilder;
+use uhg_custom_appollo_roouter::services::FakeNewRouterRequestBuilder;
+use uhg_custom_appollo_roouter::services::FakeNewRouterResponseBuilder;
+use uhg_custom_appollo_roouter::services::FakeNewSubgraphRequestBuilder;
+use uhg_custom_appollo_roouter::services::FakeNewSubgraphResponseBuilder;
+use uhg_custom_appollo_roouter::services::NewExecutionRequestBuilder;
+use uhg_custom_appollo_roouter::services::NewExecutionResponseBuilder;
+use uhg_custom_appollo_roouter::services::NewExecutionServiceBuilder;
+use uhg_custom_appollo_roouter::services::NewQueryPlannerRequestBuilder;
+use uhg_custom_appollo_roouter::services::NewQueryPlannerResponseBuilder;
+use uhg_custom_appollo_roouter::services::NewRouterRequestBuilder;
+use uhg_custom_appollo_roouter::services::NewRouterResponseBuilder;
+use uhg_custom_appollo_roouter::services::NewRouterServiceBuilder;
+use uhg_custom_appollo_roouter::services::NewSubgraphRequestBuilder;
+use uhg_custom_appollo_roouter::services::NewSubgraphResponseBuilder;
+use uhg_custom_appollo_roouter::services::PluggableRouterServiceBuilder;
+use uhg_custom_appollo_roouter::services::QueryPlannerContent;
+use uhg_custom_appollo_roouter::services::QueryPlannerRequest;
+use uhg_custom_appollo_roouter::services::QueryPlannerResponse;
+use uhg_custom_appollo_roouter::services::ResponseBody;
+use uhg_custom_appollo_roouter::services::RouterRequest;
+use uhg_custom_appollo_roouter::services::RouterResponse;
+use uhg_custom_appollo_roouter::services::RouterService;
+use uhg_custom_appollo_roouter::services::SubgraphRequest;
+use uhg_custom_appollo_roouter::services::SubgraphResponse;
+use uhg_custom_appollo_roouter::services::SubgraphService;
+use uhg_custom_appollo_roouter::services::http_ext::FakeNewRequestBuilder;
+use uhg_custom_appollo_roouter::services::http_ext::IntoHeaderName;
+use uhg_custom_appollo_roouter::services::http_ext::IntoHeaderValue;
+use uhg_custom_appollo_roouter::services::http_ext::NewRequestBuilder;
+use uhg_custom_appollo_roouter::services::http_ext::Request;
+use uhg_custom_appollo_roouter::services::http_ext::Response;
+use uhg_custom_appollo_roouter::subscriber::RouterSubscriber;
+use uhg_custom_appollo_roouter::subscriber::is_global_subscriber_set;
+use uhg_custom_appollo_roouter::subscriber::replace_layer;
+use uhg_custom_appollo_roouter::subscriber::set_global_subscriber;
 </pre>
 </details>
 
@@ -5405,7 +5405,7 @@ apollo_router::main()
 However, if you want to specify extra customization to configuration/schema/shutdown then you may use `Executable::builder()` to override behavior.
 
 ```rust
-use apollo_router::Executable;
+use uhg_custom_appollo_roouter::Executable;
 Executable::builder()
   .router_builder_fn(|configuration, schema| ...) // Optional
   .start().await?
@@ -5786,7 +5786,7 @@ To prepare for the implementation of the `@defer` directive, the `ExecutionRespo
 
 ```diff
 + use futures::stream::BoxStream;
-+ use apollo_router::ResponseBody;
++ use uhg_custom_appollo_roouter::ResponseBody;
 ```
 
 - Update the `router_service` and the `execution_service` sections of your Plugin (if applicable):
@@ -5841,7 +5841,7 @@ To upgrade, remove any dependency on the `apollo-router-core` crate from your `C
 
 ```diff
 - use apollo_router_core::prelude::*;
-+ use apollo_router::prelude::*;
++ use uhg_custom_appollo_roouter::prelude::*;
 ```
 
 By [@SimonSapin](https://github.com/SimonSapin) in https://github.com/apollographql/router/pull/1189

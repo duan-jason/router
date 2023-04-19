@@ -5,7 +5,7 @@ use opentelemetry::sdk::export::metrics::AggregatorSelector;
 use opentelemetry::sdk::metrics::aggregators;
 use opentelemetry::sdk::metrics::aggregators::Aggregator;
 use opentelemetry::sdk::metrics::sdk_api::Descriptor;
-
+use opentelemetry::sdk::metrics::sdk_api::InstrumentKind;
 use crate::plugins::telemetry::config::MetricsCommon;
 
 //
@@ -15,13 +15,28 @@ use crate::plugins::telemetry::config::MetricsCommon;
 
 #[derive(Debug, Clone)]
 pub(crate) struct CustomHistogramAggregator {
-    buckets: HashMap<String, Vec<f64>>
+    buckets: Option<HashMap<String, Vec<f64>>>,
+    default_bucket: Vec<f64>
 }
 
 impl CustomHistogramAggregator {
     pub(crate) fn new(metrics_config: &MetricsCommon) -> CustomHistogramAggregator {
-        CustomHistogramAggregator {
-            buckets: metrics_config.buckets.clone()
+        let mut buckets: Option<HashMap<String, Vec<f64>>> = None;
+        let mut default_bucket: Vec<f64> = vec![0.001, 0.005, 0.015, 0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 1.0, 5.0, 10.0];
+
+        if metrics_config.buckets.is_some() {
+            let buckets_all = metrics_config.buckets.as_ref().unwrap().clone();
+
+            if buckets_all.contains_key("default") {
+                default_bucket = buckets_all.get("default").unwrap().clone();
+            }
+
+            buckets = Some(buckets_all);
+        }
+
+        CustomHistogramAggregator { 
+            buckets, 
+            default_bucket 
         }
     }
 }
@@ -31,13 +46,27 @@ impl AggregatorSelector for CustomHistogramAggregator {
         &self,
         descriptor: &Descriptor,
     ) -> Option<Arc<(dyn Aggregator + Sync + std::marker::Send + 'static)>> {
-        match self.buckets.get(descriptor.name()) {
-            Some(buckets) => histogram_buckets(buckets),
-            None => histogram_buckets(&vec![0.001, 0.005, 0.015, 0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 1.0, 5.0, 10.0])
+        match descriptor.instrument_kind() {
+            // Histogram
+            InstrumentKind::Histogram => {
+                let boundaries = match &self.buckets {
+                    Some(buckets) => {
+                        match buckets.get(descriptor.name()) {
+                            Some(found_buckets) => found_buckets,
+                            None => &self.default_bucket
+                        }
+                    },
+                    None => &self.default_bucket
+                };
+
+                Some(Arc::new(aggregators::histogram(boundaries)))
+            },
+
+            // Gauge
+            InstrumentKind::GaugeObserver => Some(Arc::new(aggregators::last_value())),
+
+            // InstrumentKind::Counter, UpDownCounter, CounterObserver, UpDownCounterObserver
+            _ => Some(Arc::new(aggregators::sum()))
         }
     }
-}
-
-fn histogram_buckets(boundries: &Vec<f64>) -> Option<Arc<(dyn Aggregator + Sync + std::marker::Send + 'static)>> {
-    Some(Arc::new(aggregators::histogram(boundries)))
 }

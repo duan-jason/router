@@ -13,9 +13,9 @@ fn main() -> Result<()> {
 
 #[cfg(test)]
 mod tests {
-    use apollo_router::graphql;
-    use apollo_router::plugin::test;
-    use apollo_router::services::supergraph;
+    use uhg_custom_appollo_roouter::graphql;
+    use uhg_custom_appollo_roouter::plugin::test;
+    use uhg_custom_appollo_roouter::services::supergraph;
     use http::StatusCode;
     use tower::util::ServiceExt;
 
