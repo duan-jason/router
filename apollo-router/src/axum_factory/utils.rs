@@ -126,12 +126,37 @@ impl<B> MakeSpan<B> for PropagatingMakeSpan {
 
 impl PropagatingMakeSpan {
     fn create_span<B>(&mut self, request: &Request<B>) -> Span {
+        // JASON customization - add labels: consumerName, correlationId, cid
+        let consumer_name = match request.headers().get("consumername") {
+            Some(s) => std::str::from_utf8(s.as_bytes()).unwrap(),
+            None => ""
+        };
+        let mut id = String::from("");
+        let correlation_id = match request.headers().get("X-Correlation-Id") {
+            Some(s) => std::str::from_utf8(s.as_bytes()).unwrap(),
+            None => {
+                match crate::tracer::TraceId::maybe_new().map(|t| t.to_string()) {
+                    Some(v) => { id = format!("hcp-{}", v); }
+                    None => { }
+                };
+
+                &id
+            }
+        };        
+        let cid = match request.headers().get("Optum-Cid-Ext") {
+            Some(s) => std::str::from_utf8(s.as_bytes()).unwrap(),
+            None => ""
+        };
+
         if matches!(
             self.entitlement,
             EntitlementState::EntitledWarn | EntitlementState::EntitledHalt
         ) {
             tracing::error_span!(
                 REQUEST_SPAN_NAME,
+                "consumerName" = consumer_name,
+                "correlationId" = correlation_id,
+                "cid" = cid,
                 "http.method" = %request.method(),
                 "http.route" = %request.uri(),
                 "http.flavor" = ?request.version(),
@@ -142,6 +167,9 @@ impl PropagatingMakeSpan {
         } else {
             tracing::info_span!(
                 REQUEST_SPAN_NAME,
+                "consumerName" = consumer_name,
+                "correlationId" = correlation_id,
+                "cid" = cid,
                 "http.method" = %request.method(),
                 "http.route" = %request.uri(),
                 "http.flavor" = ?request.version(),

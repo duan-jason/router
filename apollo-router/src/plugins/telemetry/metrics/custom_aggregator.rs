@@ -8,6 +8,8 @@ use opentelemetry::sdk::metrics::sdk_api::Descriptor;
 use opentelemetry::sdk::metrics::sdk_api::InstrumentKind;
 use crate::plugins::telemetry::config::MetricsCommon;
 
+// JASON customization - add labels: consumerName, correlationId, cid
+
 //
 // Metrics CustomAggregator
 // reference: https://github.com/open-telemetry/opentelemetry-rust/blob/bfeda30583f3df6733e8ebce2f5964f6a7b69b5c/examples/dynatrace/src/main.rs

@@ -86,6 +86,7 @@ impl MetricsConfigurator for Config {
         if self.enabled {
             let mut controller = controllers::basic(
                 processors::factory(
+                    // JASON customization - CustomHistogramAggregator
                     CustomHistogramAggregator::new(metrics_config),
                     aggregation::stateless_temporality_selector(),
                 )
