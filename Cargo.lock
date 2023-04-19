@@ -19,11 +19,11 @@ name = "add-timestamp-header"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "apollo-router",
  "http",
  "serde_json",
  "tokio",
  "tower",
+ "uhg-custom-appollo-roouter",
 ]
 
 [[package]]
@@ -271,144 +271,10 @@ dependencies = [
 ]
 
 [[package]]
-name = "apollo-router"
-version = "1.15.1"
-dependencies = [
- "access-json",
- "ansi_term",
- "anyhow",
- "apollo-compiler",
- "apollo-parser 0.5.1",
- "arc-swap",
- "askama",
- "async-compression",
- "async-trait",
- "atty",
- "axum",
- "backtrace",
- "base64 0.20.0",
- "buildstructor 0.5.2",
- "bytes",
- "ci_info",
- "clap 4.2.1",
- "console-subscriber",
- "dashmap",
- "derivative",
- "derive_more",
- "dhat",
- "diff",
- "directories",
- "displaydoc",
- "ecdsa 0.15.1",
- "flate2",
- "fred",
- "futures",
- "futures-test",
- "graphql_client",
- "heck 0.4.1",
- "hex",
- "http",
- "http-body",
- "http-serde",
- "humantime 2.1.0",
- "humantime-serde",
- "hyper",
- "hyper-rustls",
- "indexmap",
- "insta",
- "introspector-gadget",
- "itertools",
- "jsonpath_lib",
- "jsonschema",
- "jsonwebtoken",
- "lazy_static",
- "libc",
- "linkme",
- "lru",
- "maplit",
- "mediatype",
- "memchr",
- "miette",
- "mime",
- "mockall",
- "multer",
- "multimap",
- "notify",
- "once_cell",
- "opentelemetry",
- "opentelemetry-datadog",
- "opentelemetry-http",
- "opentelemetry-jaeger",
- "opentelemetry-otlp",
- "opentelemetry-prometheus",
- "opentelemetry-semantic-conventions",
- "opentelemetry-zipkin",
- "p256 0.12.0",
- "paste",
- "pin-project-lite",
- "prometheus",
- "prost",
- "prost-types",
- "proteus",
- "rand 0.8.5",
- "rand_core 0.6.4",
- "redis",
- "regex",
- "reqwest",
- "rhai",
- "router-bridge",
- "rstack",
- "rust-embed",
- "rustls",
- "rustls-pemfile",
- "schemars",
- "serde",
- "serde_json",
- "serde_json_bytes",
- "serde_urlencoded",
- "serde_yaml",
- "sha2",
- "shellexpand",
- "similar-asserts",
- "static_assertions",
- "strum_macros",
- "sys-info",
- "tempfile",
- "test-log",
- "test-span",
- "thiserror",
- "tokio",
- "tokio-rustls",
- "tokio-stream",
- "tokio-util",
- "tonic",
- "tonic-build",
- "tower",
- "tower-http 0.3.5",
- "tower-service",
- "tower-test",
- "tracing",
- "tracing-core",
- "tracing-futures",
- "tracing-opentelemetry",
- "tracing-subscriber",
- "tracing-test",
- "uname",
- "url",
- "urlencoding",
- "uuid",
- "walkdir 2.3.3",
- "wiremock",
- "wsl",
- "yaml-rust",
-]
-
-[[package]]
 name = "apollo-router-benchmarks"
 version = "1.15.1"
 dependencies = [
  "apollo-parser 0.4.1",
- "apollo-router",
  "apollo-smith",
  "arbitrary",
  "criterion",
@@ -417,6 +283,7 @@ dependencies = [
  "serde_json",
  "tokio",
  "tower",
+ "uhg-custom-appollo-roouter",
 ]
 
 [[package]]
@@ -536,7 +403,6 @@ name = "async-allow-client-id"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "apollo-router",
  "async-trait",
  "http",
  "schemars",
@@ -545,6 +411,7 @@ dependencies = [
  "serde_json_bytes",
  "tokio",
  "tower",
+ "uhg-custom-appollo-roouter",
 ]
 
 [[package]]
@@ -904,11 +771,11 @@ name = "cache-control"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "apollo-router",
  "http",
  "serde_json",
  "tokio",
  "tower",
+ "uhg-custom-appollo-roouter",
 ]
 
 [[package]]
@@ -1257,11 +1124,11 @@ name = "context-data"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "apollo-router",
  "async-trait",
  "http",
  "tower",
  "tracing",
+ "uhg-custom-appollo-roouter",
 ]
 
 [[package]]
@@ -1281,11 +1148,11 @@ name = "cookies-to-headers"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "apollo-router",
  "http",
  "serde_json",
  "tokio",
  "tower",
+ "uhg-custom-appollo-roouter",
 ]
 
 [[package]]
@@ -2011,7 +1878,6 @@ name = "external-subgraph"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "apollo-router",
  "async-trait",
  "futures",
  "http",
@@ -2023,6 +1889,7 @@ dependencies = [
  "tokio",
  "tower",
  "tracing",
+ "uhg-custom-appollo-roouter",
 ]
 
 [[package]]
@@ -2108,13 +1975,13 @@ name = "forbid-anonymous-operations"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "apollo-router",
  "async-trait",
  "http",
  "serde_json",
  "tokio",
  "tower",
  "tracing",
+ "uhg-custom-appollo-roouter",
 ]
 
 [[package]]
@@ -2122,11 +1989,11 @@ name = "forbid_anonymous_operations_rhai"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "apollo-router",
  "http",
  "serde_json",
  "tokio",
  "tower",
+ "uhg-custom-appollo-roouter",
 ]
 
 [[package]]
@@ -2632,7 +2499,6 @@ name = "hello-world"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "apollo-router",
  "async-trait",
  "schemars",
  "serde",
@@ -2640,6 +2506,7 @@ dependencies = [
  "tokio",
  "tower",
  "tracing",
+ "uhg-custom-appollo-roouter",
 ]
 
 [[package]]
@@ -3110,11 +2977,11 @@ name = "jwt-claims"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "apollo-router",
  "http",
  "serde_json",
  "tokio",
  "tower",
+ "uhg-custom-appollo-roouter",
 ]
 
 [[package]]
@@ -3678,11 +3545,11 @@ name = "op-name-to-header"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "apollo-router",
  "http",
  "serde_json",
  "tokio",
  "tower",
+ "uhg-custom-appollo-roouter",
 ]
 
 [[package]]
@@ -4373,7 +4240,6 @@ name = "propagate-status-code"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "apollo-router",
  "async-trait",
  "http",
  "schemars",
@@ -4381,6 +4247,7 @@ dependencies = [
  "serde_json",
  "tokio",
  "tower",
+ "uhg-custom-appollo-roouter",
 ]
 
 [[package]]
@@ -4734,11 +4601,11 @@ name = "rhai-data-response-mutate"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "apollo-router",
  "http",
  "serde_json",
  "tokio",
  "tower",
+ "uhg-custom-appollo-roouter",
 ]
 
 [[package]]
@@ -4746,11 +4613,11 @@ name = "rhai-error-response-mutate"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "apollo-router",
  "http",
  "serde_json",
  "tokio",
  "tower",
+ "uhg-custom-appollo-roouter",
 ]
 
 [[package]]
@@ -4758,11 +4625,11 @@ name = "rhai-logging"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "apollo-router",
  "http",
  "serde_json",
  "tokio",
  "tower",
+ "uhg-custom-appollo-roouter",
 ]
 
 [[package]]
@@ -4770,11 +4637,11 @@ name = "rhai-subgraph-request-log"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "apollo-router",
  "http",
  "serde_json",
  "tokio",
  "tower",
+ "uhg-custom-appollo-roouter",
 ]
 
 [[package]]
@@ -4782,11 +4649,11 @@ name = "rhai-surrogate-cache-key"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "apollo-router",
  "http",
  "serde_json",
  "tokio",
  "tower",
+ "uhg-custom-appollo-roouter",
 ]
 
 [[package]]
@@ -5606,10 +5473,10 @@ version = "0.1.0"
 dependencies = [
  "anyhow",
  "apollo-compiler",
- "apollo-router",
  "async-trait",
  "tower",
  "tracing",
+ "uhg-custom-appollo-roouter",
 ]
 
 [[package]]
@@ -5863,12 +5730,12 @@ name = "throw-error"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "apollo-router",
  "http",
  "hyper",
  "serde_json",
  "tokio",
  "tower",
+ "uhg-custom-appollo-roouter",
 ]
 
 [[package]]
@@ -6386,6 +6253,139 @@ name = "ucd-trie"
 version = "0.1.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9e79c4d996edb816c91e4308506774452e55e95c3c9de07b6729e17e15a5ef81"
+
+[[package]]
+name = "uhg-custom-appollo-roouter"
+version = "1.0.0"
+dependencies = [
+ "access-json",
+ "ansi_term",
+ "anyhow",
+ "apollo-compiler",
+ "apollo-parser 0.5.1",
+ "arc-swap",
+ "askama",
+ "async-compression",
+ "async-trait",
+ "atty",
+ "axum",
+ "backtrace",
+ "base64 0.20.0",
+ "buildstructor 0.5.2",
+ "bytes",
+ "ci_info",
+ "clap 4.2.1",
+ "console-subscriber",
+ "dashmap",
+ "derivative",
+ "derive_more",
+ "dhat",
+ "diff",
+ "directories",
+ "displaydoc",
+ "ecdsa 0.15.1",
+ "flate2",
+ "fred",
+ "futures",
+ "futures-test",
+ "graphql_client",
+ "heck 0.4.1",
+ "hex",
+ "http",
+ "http-body",
+ "http-serde",
+ "humantime 2.1.0",
+ "humantime-serde",
+ "hyper",
+ "hyper-rustls",
+ "indexmap",
+ "insta",
+ "introspector-gadget",
+ "itertools",
+ "jsonpath_lib",
+ "jsonschema",
+ "jsonwebtoken",
+ "lazy_static",
+ "libc",
+ "linkme",
+ "lru",
+ "maplit",
+ "mediatype",
+ "memchr",
+ "miette",
+ "mime",
+ "mockall",
+ "multer",
+ "multimap",
+ "notify",
+ "once_cell",
+ "opentelemetry",
+ "opentelemetry-datadog",
+ "opentelemetry-http",
+ "opentelemetry-jaeger",
+ "opentelemetry-otlp",
+ "opentelemetry-prometheus",
+ "opentelemetry-semantic-conventions",
+ "opentelemetry-zipkin",
+ "p256 0.12.0",
+ "paste",
+ "pin-project-lite",
+ "prometheus",
+ "prost",
+ "prost-types",
+ "proteus",
+ "rand 0.8.5",
+ "rand_core 0.6.4",
+ "redis",
+ "regex",
+ "reqwest",
+ "rhai",
+ "router-bridge",
+ "rstack",
+ "rust-embed",
+ "rustls",
+ "rustls-pemfile",
+ "schemars",
+ "serde",
+ "serde_json",
+ "serde_json_bytes",
+ "serde_urlencoded",
+ "serde_yaml",
+ "sha2",
+ "shellexpand",
+ "similar-asserts",
+ "static_assertions",
+ "strum_macros",
+ "sys-info",
+ "tempfile",
+ "test-log",
+ "test-span",
+ "thiserror",
+ "tokio",
+ "tokio-rustls",
+ "tokio-stream",
+ "tokio-util",
+ "tonic",
+ "tonic-build",
+ "tower",
+ "tower-http 0.3.5",
+ "tower-service",
+ "tower-test",
+ "tracing",
+ "tracing-core",
+ "tracing-futures",
+ "tracing-opentelemetry",
+ "tracing-subscriber",
+ "tracing-test",
+ "uname",
+ "url",
+ "urlencoding",
+ "uuid",
+ "walkdir 2.3.3",
+ "wiremock",
+ "wsl",
+ "yaml-rust",
+]
 
 [[package]]
 name = "uname"
