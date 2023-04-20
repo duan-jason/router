@@ -131,14 +131,15 @@ impl PropagatingMakeSpan {
             Some(s) => std::str::from_utf8(s.as_bytes()).unwrap(),
             None => ""
         };
-        let mut id = String::from("");
+        let id = String::from("");
         let correlation_id = match request.headers().get("X-Correlation-Id") {
             Some(s) => std::str::from_utf8(s.as_bytes()).unwrap(),
             None => {
-                match crate::tracer::TraceId::maybe_new().map(|t| t.to_string()) {
-                    Some(v) => { id = format!("hcp-{}", v); }
-                    None => { }
-                };
+                // can't get trace id here! leave it empty, will be overriden in plugin repo
+                // match crate::tracer::TraceId::maybe_new().map(|t| t.to_string()) {
+                //     Some(v) => { id = format!("hcp-{}", v); }
+                //     None => { }
+                // };
 
                 &id
             }
