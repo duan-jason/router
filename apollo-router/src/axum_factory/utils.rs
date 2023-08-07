@@ -126,8 +126,12 @@ impl<B> MakeSpan<B> for PropagatingMakeSpan {
 
 impl PropagatingMakeSpan {
     fn create_span<B>(&mut self, request: &Request<B>) -> Span {
-        // JASON customization - add labels: consumerName, correlationId, cid
+        // JASON customization - add labels: consumerName, roles, correlationId, cid
         let consumer_name = match request.headers().get("consumername") {
+            Some(s) => std::str::from_utf8(s.as_bytes()).unwrap(),
+            None => ""
+        };
+        let role_id = match request.headers().get("roleid") {
             Some(s) => std::str::from_utf8(s.as_bytes()).unwrap(),
             None => ""
         };
@@ -156,6 +160,7 @@ impl PropagatingMakeSpan {
             tracing::error_span!(
                 REQUEST_SPAN_NAME,
                 "consumerName" = consumer_name,
+                "roles" = role_id,
                 "correlationId" = correlation_id,
                 "cid" = cid,
                 "http.method" = %request.method(),
@@ -169,6 +174,7 @@ impl PropagatingMakeSpan {
             tracing::info_span!(
                 REQUEST_SPAN_NAME,
                 "consumerName" = consumer_name,
+                "roles" = role_id,
                 "correlationId" = correlation_id,
                 "cid" = cid,
                 "http.method" = %request.method(),
