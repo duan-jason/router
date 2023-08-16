@@ -126,7 +126,7 @@ impl<B> MakeSpan<B> for PropagatingMakeSpan {
 
 impl PropagatingMakeSpan {
     fn create_span<B>(&mut self, request: &Request<B>) -> Span {
-        // JASON customization - add labels: consumerName, roles, correlationId, cid
+        // JASON customization - add labels: consumerName, roles, correlationId, cid, azure_region
         let consumer_name = match request.headers().get("consumername") {
             Some(s) => std::str::from_utf8(s.as_bytes()).unwrap(),
             None => ""
@@ -152,6 +152,7 @@ impl PropagatingMakeSpan {
             Some(s) => std::str::from_utf8(s.as_bytes()).unwrap(),
             None => ""
         };
+        let azure_region = std::env::var("AZURE_REGION").unwrap_or(String::from(""));
 
         if matches!(
             self.entitlement,
@@ -163,6 +164,7 @@ impl PropagatingMakeSpan {
                 "roles" = role_id,
                 "correlationId" = correlation_id,
                 "cid" = cid,
+                "azure_region" = azure_region,
                 "http.method" = %request.method(),
                 "http.route" = %request.uri(),
                 "http.flavor" = ?request.version(),
@@ -177,6 +179,7 @@ impl PropagatingMakeSpan {
                 "roles" = role_id,
                 "correlationId" = correlation_id,
                 "cid" = cid,
+                "azure_region" = azure_region,
                 "http.method" = %request.method(),
                 "http.route" = %request.uri(),
                 "http.flavor" = ?request.version(),
