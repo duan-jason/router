@@ -125,12 +125,45 @@ impl<B> MakeSpan<B> for PropagatingMakeSpan {
 
 impl PropagatingMakeSpan {
     fn create_span<B>(&mut self, request: &Request<B>) -> Span {
+        // JASON customization - add labels: consumerName, roles, correlationId, cid, azure_region
+        let consumer_name = match request.headers().get("consumername") {
+            Some(s) => std::str::from_utf8(s.as_bytes()).unwrap(),
+            None => ""
+        };
+        let role_id = match request.headers().get("roleid") {
+            Some(s) => std::str::from_utf8(s.as_bytes()).unwrap(),
+            None => ""
+        };
+        let id = String::from("");
+        let correlation_id = match request.headers().get("X-Correlation-Id") {
+            Some(s) => std::str::from_utf8(s.as_bytes()).unwrap(),
+            None => {
+                // can't get trace id here! leave it empty, will be overriden in plugin repo
+                // match crate::tracer::TraceId::maybe_new().map(|t| t.to_string()) {
+                //     Some(v) => { id = format!("hcp-{}", v); }
+                //     None => { }
+                // };
+
+                &id
+            }
+        };
+        let cid = match request.headers().get("Optum-Cid-Ext") {
+            Some(s) => std::str::from_utf8(s.as_bytes()).unwrap(),
+            None => ""
+        };
+        let azure_region = std::env::var("AZURE_REGION").unwrap_or(String::from(""));
+
         if matches!(
             self.license,
             LicenseState::LicensedWarn | LicenseState::LicensedHalt
         ) {
             tracing::error_span!(
                 REQUEST_SPAN_NAME,
+                "consumerName" = consumer_name,
+                "roles" = role_id,
+                "correlationId" = correlation_id,
+                "cid" = cid,
+                "azure_region" = azure_region,
                 "http.method" = %request.method(),
                 "http.route" = %request.uri(),
                 "http.flavor" = ?request.version(),
@@ -145,6 +178,11 @@ impl PropagatingMakeSpan {
         } else {
             tracing::info_span!(
                 REQUEST_SPAN_NAME,
+                "consumerName" = consumer_name,
+                "roles" = role_id,
+                "correlationId" = correlation_id,
+                "cid" = cid,
+                "azure_region" = azure_region,
                 "http.method" = %request.method(),
                 "http.route" = %request.uri(),
                 "http.flavor" = ?request.version(),
