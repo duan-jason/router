@@ -1,9 +1,9 @@
 use std::sync::Arc;
 use std::sync::Mutex;
 
-use apollo_router::graphql;
-use apollo_router::services::router;
-use apollo_router::services::supergraph;
+use uhg_custom_appollo_roouter::graphql;
+use uhg_custom_appollo_roouter::services::router;
+use uhg_custom_appollo_roouter::services::supergraph;
 use tower::ServiceExt;
 use tracing::field;
 use tracing::Level;
@@ -62,7 +62,7 @@ impl<'a> LookupSpan<'a> for TestLogSubscriber {
 }
 
 async fn setup_router(config: serde_json::Value) -> router::BoxCloneService {
-    apollo_router::TestHarness::builder()
+    uhg_custom_appollo_roouter::TestHarness::builder()
         .with_subgraph_network_requests()
         .configuration_json(config)
         .unwrap()

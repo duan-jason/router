@@ -14,5 +14,5 @@ mod echo_co_processor;
 
 // `APOLLO_KEY="YOUR_APOLLO_KEY" APOLLO_GRAPH_REF="YOUR_APOLLO_GRAPH_REF" cargo run -- -c ./router.yaml`
 fn main() -> Result<()> {
-    apollo_router::main()
+    uhg_custom_appollo_roouter::main()
 }

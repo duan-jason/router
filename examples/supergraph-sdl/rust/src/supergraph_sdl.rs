@@ -1,10 +1,10 @@
 use std::sync::Arc;
 
 use apollo_compiler::ApolloCompiler;
-use apollo_router::plugin::Plugin;
-use apollo_router::plugin::PluginInit;
-use apollo_router::register_plugin;
-use apollo_router::services::supergraph;
+use uhg_custom_appollo_roouter::plugin::Plugin;
+use uhg_custom_appollo_roouter::plugin::PluginInit;
+use uhg_custom_appollo_roouter::register_plugin;
+use uhg_custom_appollo_roouter::services::supergraph;
 use tower::BoxError;
 use tower::ServiceBuilder;
 use tower::ServiceExt;

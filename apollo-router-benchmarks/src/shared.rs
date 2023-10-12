@@ -1,12 +1,12 @@
 // this file is shared between the tests and benchmarks, using
 // include!() instead of as a pub module, so it is only compiled
 // in dev mode
-use apollo_router::graphql::Response;
-use apollo_router::plugin::test::MockSubgraph;
-use apollo_router::services::router;
-use apollo_router::services::supergraph;
-use apollo_router::MockedSubgraphs;
-use apollo_router::TestHarness;
+use uhg_custom_appollo_roouter::graphql::Response;
+use uhg_custom_appollo_roouter::plugin::test::MockSubgraph;
+use uhg_custom_appollo_roouter::services::router;
+use uhg_custom_appollo_roouter::services::supergraph;
+use uhg_custom_appollo_roouter::MockedSubgraphs;
+use uhg_custom_appollo_roouter::TestHarness;
 use once_cell::sync::Lazy;
 use serde_json::json;
 

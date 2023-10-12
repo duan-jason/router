@@ -14,5 +14,5 @@ mod supergraph_sdl;
 
 // `cargo run -- -s ../../graphql/supergraph.graphql -c ./router.yaml`
 fn main() -> Result<()> {
-    apollo_router::main()
+    uhg_custom_appollo_roouter::main()
 }

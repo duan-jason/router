@@ -27,16 +27,16 @@ use anyhow::Result;
 
 // `cargo run -- -s ../../graphql/supergraph.graphql -c ./router.yaml`
 fn main() -> Result<()> {
-    apollo_router::main()
+    uhg_custom_appollo_roouter::main()
 }
 
 #[cfg(test)]
 mod tests {
 
-    use apollo_router::graphql;
-    use apollo_router::plugin::test;
-    use apollo_router::services::router;
-    use apollo_router::services::supergraph;
+    use uhg_custom_appollo_roouter::graphql;
+    use uhg_custom_appollo_roouter::plugin::test;
+    use uhg_custom_appollo_roouter::services::router;
+    use uhg_custom_appollo_roouter::services::supergraph;
     use http::StatusCode;
     use tower::util::ServiceExt;
 
@@ -99,7 +99,7 @@ mod tests {
             }
         });
 
-        apollo_router::TestHarness::builder()
+        uhg_custom_appollo_roouter::TestHarness::builder()
             .configuration_json(config)
             .unwrap()
             .supergraph_hook(move |_| mock_service.clone().boxed())

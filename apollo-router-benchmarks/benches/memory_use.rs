@@ -27,7 +27,7 @@ async fn main() {
     println!("Physical (MiB)\tVirtual (MiB)\tWhen");
     print_stats();
     println!("tokio::main");
-    let mut harness = apollo_router::TestHarness::builder()
+    let mut harness = uhg_custom_appollo_roouter::TestHarness::builder()
         .schema(include_str!("fixtures/supergraph.graphql"))
         .build_supergraph()
         .await
@@ -35,7 +35,7 @@ async fn main() {
     print_stats();
     println!("harness built");
     for (i, &query) in QUERIES.iter().enumerate() {
-        let request = apollo_router::services::supergraph::Request::fake_builder()
+        let request = uhg_custom_appollo_roouter::services::supergraph::Request::fake_builder()
             .query(query)
             .build()
             .unwrap();

@@ -1,4 +1,4 @@
-use apollo_router::_private::create_test_service_factory_from_yaml;
+use uhg_custom_appollo_roouter::_private::create_test_service_factory_from_yaml;
 
 #[tokio::test]
 async fn test_supergraph_validation_errors_are_passed_on() {

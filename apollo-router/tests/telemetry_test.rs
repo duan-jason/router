@@ -1,7 +1,7 @@
 mod common;
 use std::result::Result;
 
-use apollo_router::_private::create_test_service_factory_from_yaml;
+use uhg_custom_appollo_roouter::_private::create_test_service_factory_from_yaml;
 use tower::BoxError;
 
 use crate::common::IntegrationTest;

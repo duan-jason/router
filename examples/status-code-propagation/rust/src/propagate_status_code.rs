@@ -1,8 +1,8 @@
-use apollo_router::plugin::Plugin;
-use apollo_router::plugin::PluginInit;
-use apollo_router::register_plugin;
-use apollo_router::services::subgraph;
-use apollo_router::services::supergraph;
+use uhg_custom_appollo_roouter::plugin::Plugin;
+use uhg_custom_appollo_roouter::plugin::PluginInit;
+use uhg_custom_appollo_roouter::register_plugin;
+use uhg_custom_appollo_roouter::services::subgraph;
+use uhg_custom_appollo_roouter::services::supergraph;
 use http::StatusCode;
 use schemars::JsonSchema;
 use serde::Deserialize;
@@ -88,11 +88,11 @@ register_plugin!("example", "propagate_status_code", PropagateStatusCode);
 // and test your plugins in isolation:
 #[cfg(test)]
 mod tests {
-    use apollo_router::plugin::test;
-    use apollo_router::plugin::Plugin;
-    use apollo_router::plugin::PluginInit;
-    use apollo_router::services::subgraph;
-    use apollo_router::services::supergraph;
+    use uhg_custom_appollo_roouter::plugin::test;
+    use uhg_custom_appollo_roouter::plugin::Plugin;
+    use uhg_custom_appollo_roouter::plugin::PluginInit;
+    use uhg_custom_appollo_roouter::services::subgraph;
+    use uhg_custom_appollo_roouter::services::supergraph;
     use http::StatusCode;
     use serde_json::json;
     use tower::ServiceExt;

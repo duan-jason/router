@@ -7,13 +7,13 @@ use anyhow::Result;
 
 // `cargo run -- -s ../../graphql/supergraph.graphql -c ./router.yaml`
 fn main() -> Result<()> {
-    apollo_router::main()
+    uhg_custom_appollo_roouter::main()
 }
 
 #[cfg(test)]
 mod tests {
-    use apollo_router::services::supergraph;
-    use apollo_router::Context;
+    use uhg_custom_appollo_roouter::services::supergraph;
+    use uhg_custom_appollo_roouter::Context;
     use http::StatusCode;
     use tower::ServiceExt;
 
@@ -25,7 +25,7 @@ mod tests {
                 "main": "rhai_error_response_mutate.rhai",
             }
         });
-        let test_harness = apollo_router::TestHarness::builder()
+        let test_harness = uhg_custom_appollo_roouter::TestHarness::builder()
             .configuration_json(config)
             .unwrap()
             .build_router()

@@ -1,9 +1,9 @@
-use apollo_router::plugin::Plugin;
-use apollo_router::plugin::PluginInit;
-use apollo_router::register_plugin;
-use apollo_router::services::execution;
-use apollo_router::services::subgraph;
-use apollo_router::services::supergraph;
+use uhg_custom_appollo_roouter::plugin::Plugin;
+use uhg_custom_appollo_roouter::plugin::PluginInit;
+use uhg_custom_appollo_roouter::register_plugin;
+use uhg_custom_appollo_roouter::services::execution;
+use uhg_custom_appollo_roouter::services::subgraph;
+use uhg_custom_appollo_roouter::services::supergraph;
 use schemars::JsonSchema;
 use serde::Deserialize;
 use tower::BoxError;
@@ -94,7 +94,7 @@ mod tests {
         // Build a test harness. Usually we'd use this and send requests to
         // it, but in this case it's enough to build the harness to see our
         // output when our service registers.
-        let _test_harness = apollo_router::TestHarness::builder()
+        let _test_harness = uhg_custom_appollo_roouter::TestHarness::builder()
             .configuration_json(config)
             .unwrap()
             .build_router()

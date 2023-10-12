@@ -37,9 +37,9 @@ To demonstrate building a plugin, we'll walk through the [hello world example pl
 Most plugins should start by including the following set of `use` declarations:
 
 ```rust title="hello_world.rs"
-use apollo_router::plugin::Plugin;
-use apollo_router::register_plugin;
-use apollo_router::services::*;
+use uhg_custom_appollo_roouter::plugin::Plugin;
+use uhg_custom_appollo_roouter::register_plugin;
+use uhg_custom_appollo_roouter::services::*;
 use schemars::JsonSchema;
 use serde::Deserialize;
 use tower::{BoxError, ServiceBuilder, ServiceExt};
@@ -79,9 +79,9 @@ The trait also provides a default implementations for each hook, which returns t
 
 ```rust title="hello_world.rs"
 // This is a bare-bones plugin that you can duplicate when creating your own.
-use apollo_router::plugin::PluginInit;
-use apollo_router::plugin::Plugin;
-use apollo_router::services::*;
+use uhg_custom_appollo_roouter::plugin::PluginInit;
+use uhg_custom_appollo_roouter::plugin::Plugin;
+use uhg_custom_appollo_roouter::services::*;
 
 #[async_trait::async_trait]
 impl Plugin for HelloWorld {
@@ -138,7 +138,7 @@ To define custom logic for a service hook, you can use [`ServiceBuilder`](https:
 ```rust title="hello_world.rs"
 // Replaces the default definition in the example above
 use tower::ServiceBuilderExt;
-use apollo_router::ServiceBuilderExt as ApolloServiceBuilderExt;
+use uhg_custom_appollo_roouter::ServiceBuilderExt as ApolloServiceBuilderExt;
 
 fn supergraph_service(
     &self,

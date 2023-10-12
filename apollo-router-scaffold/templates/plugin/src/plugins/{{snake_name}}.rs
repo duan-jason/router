@@ -1,20 +1,20 @@
-use apollo_router::plugin::Plugin;
-use apollo_router::plugin::PluginInit;
-use apollo_router::register_plugin;
-use apollo_router::services::supergraph;
+use uhg_custom_appollo_roouter::plugin::Plugin;
+use uhg_custom_appollo_roouter::plugin::PluginInit;
+use uhg_custom_appollo_roouter::register_plugin;
+use uhg_custom_appollo_roouter::services::supergraph;
 {{#if type_basic}}
-use apollo_router::services::router;
-use apollo_router::services::execution;
-use apollo_router::services::subgraph;
+use uhg_custom_appollo_roouter::services::router;
+use uhg_custom_appollo_roouter::services::execution;
+use uhg_custom_appollo_roouter::services::subgraph;
 {{/if}}
 {{#if type_auth}}
-use apollo_router::layers::ServiceBuilderExt;
+use uhg_custom_appollo_roouter::layers::ServiceBuilderExt;
 use std::ops::ControlFlow;
 use tower::ServiceExt;
 use tower::ServiceBuilder;
 {{/if}}
 {{#if type_tracing}}
-use apollo_router::layers::ServiceBuilderExt;
+use uhg_custom_appollo_roouter::layers::ServiceBuilderExt;
 use tower::ServiceExt;
 use tower::ServiceBuilder;
 {{/if}}
@@ -161,9 +161,9 @@ register_plugin!("{{project_name}}", "{{snake_name}}", {{pascal_name}});
 
 #[cfg(test)]
 mod tests {
-    use apollo_router::TestHarness;
-    use apollo_router::services::supergraph;
-    use apollo_router::graphql;
+    use uhg_custom_appollo_roouter::TestHarness;
+    use uhg_custom_appollo_roouter::services::supergraph;
+    use uhg_custom_appollo_roouter::graphql;
     use tower::BoxError;
     use tower::ServiceExt;
 

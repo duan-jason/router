@@ -167,7 +167,7 @@ fn new_rhai_test_engine() -> Engine {
 // (there can be only one...) which means we cannot test it with #[tokio::test(flavor = "multi_thread")]
 #[test]
 fn it_logs_messages() {
-    let env_filter = "apollo_router=trace";
+    let env_filter = "uhg_custom_appollo_roouter=trace";
     let mock_writer = tracing_test::internal::MockWriter::new(&tracing_test::internal::GLOBAL_BUF);
     let subscriber = tracing_test::internal::get_subscriber(mock_writer, env_filter);
 
@@ -184,30 +184,30 @@ fn it_logs_messages() {
         engine.eval::<()>(log).expect("it logged a message");
     }
     assert!(tracing_test::internal::logs_with_scope_contain(
-        "apollo_router",
+        "uhg_custom_appollo_roouter",
         "trace log"
     ));
     assert!(tracing_test::internal::logs_with_scope_contain(
-        "apollo_router",
+        "uhg_custom_appollo_roouter",
         "debug log"
     ));
     assert!(tracing_test::internal::logs_with_scope_contain(
-        "apollo_router",
+        "uhg_custom_appollo_roouter",
         "info log"
     ));
     assert!(tracing_test::internal::logs_with_scope_contain(
-        "apollo_router",
+        "uhg_custom_appollo_roouter",
         "warn log"
     ));
     assert!(tracing_test::internal::logs_with_scope_contain(
-        "apollo_router",
+        "uhg_custom_appollo_roouter",
         "error log"
     ));
 }
 
 #[test]
 fn it_prints_messages_to_log() {
-    let env_filter = "apollo_router=trace";
+    let env_filter = "uhg_custom_appollo_roouter=trace";
     let mock_writer = tracing_test::internal::MockWriter::new(&tracing_test::internal::GLOBAL_BUF);
     let subscriber = tracing_test::internal::get_subscriber(mock_writer, env_filter);
 
@@ -217,7 +217,7 @@ fn it_prints_messages_to_log() {
         .eval::<()>(r#"print("info log")"#)
         .expect("it logged a message");
     assert!(tracing_test::internal::logs_with_scope_contain(
-        "apollo_router",
+        "uhg_custom_appollo_roouter",
         "info log"
     ));
 }

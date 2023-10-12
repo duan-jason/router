@@ -7,13 +7,13 @@ use anyhow::Result;
 
 // `cargo run -- -s ../../graphql/supergraph.graphql -c ./router.yaml`
 fn main() -> Result<()> {
-    apollo_router::main()
+    uhg_custom_appollo_roouter::main()
 }
 
 #[cfg(test)]
 mod tests {
-    use apollo_router::services::supergraph;
-    use apollo_router::Context;
+    use uhg_custom_appollo_roouter::services::supergraph;
+    use uhg_custom_appollo_roouter::Context;
     use http::StatusCode;
     use serde_json::json;
     use tower::ServiceExt;
