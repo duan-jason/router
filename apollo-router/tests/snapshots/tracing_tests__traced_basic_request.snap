@@ -22,6 +22,26 @@ expression: get_spans()
       "record": {
         "entries": [
           [
+            "consumerName",
+            ""
+          ],
+          [
+            "roles",
+            ""
+          ],
+          [
+            "correlationId",
+            ""
+          ],
+          [
+            "cid",
+            ""
+          ],
+          [
+            "azure_region",
+            ""
+          ],
+          [
             "http.method",
             "POST"
           ],
@@ -57,6 +77,11 @@ expression: get_spans()
           "module_path": "apollo_router::axum_factory::utils",
           "fields": {
             "names": [
+              "consumerName",
+              "roles",
+              "correlationId",
+              "cid",
+              "azure_region",
               "http.method",
               "http.route",
               "http.flavor",
