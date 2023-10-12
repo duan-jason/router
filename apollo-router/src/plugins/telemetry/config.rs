@@ -94,7 +94,7 @@ pub(crate) struct MetricsCommon {
     pub(crate) resources: HashMap<String, String>,
     /// Custom buckets for histograms
     #[serde(default = "default_buckets")]
-    pub(crate) buckets: Vec<f64>,
+    pub(crate) buckets: HashMap<String, Vec<f64>>,
     /// Experimental metrics to know more about caching strategies
     pub(crate) experimental_cache_metrics: ExperimentalCacheMetricsConf,
 }
@@ -119,10 +119,11 @@ impl Default for ExperimentalCacheMetricsConf {
     }
 }
 
-fn default_buckets() -> Vec<f64> {
-    vec![
-        0.001, 0.005, 0.015, 0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 1.0, 5.0, 10.0,
-    ]
+fn default_buckets() -> HashMap<String, Vec<f64>> {
+    let default: HashMap<String, Vec<f64>> = HashMap::from([
+        ("default".to_string(), vec![0.001, 0.005, 0.015, 0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 1.0, 5.0, 10.0,])
+    ]);
+    default
 }
 
 impl Default for MetricsCommon {

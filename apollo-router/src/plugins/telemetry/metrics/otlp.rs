@@ -1,5 +1,5 @@
 use opentelemetry::sdk::export::metrics::aggregation;
-use opentelemetry::sdk::metrics::selectors;
+// use opentelemetry::sdk::metrics::selectors;
 use opentelemetry::sdk::Resource;
 use opentelemetry::KeyValue;
 use opentelemetry_otlp::HttpExporterBuilder;
@@ -10,6 +10,7 @@ use crate::plugins::telemetry::config::MetricsCommon;
 use crate::plugins::telemetry::metrics::filter::FilterMeterProvider;
 use crate::plugins::telemetry::metrics::MetricsBuilder;
 use crate::plugins::telemetry::metrics::MetricsConfigurator;
+use crate::plugins::telemetry::metrics::custom_aggregator::CustomHistogramAggregator;
 use crate::plugins::telemetry::otlp::Temporality;
 
 // TODO Remove MetricExporterBuilder once upstream issue is fixed
@@ -46,7 +47,8 @@ impl MetricsConfigurator for super::super::otlp::Config {
                 let exporter = match self.temporality {
                     Temporality::Cumulative => opentelemetry_otlp::new_pipeline()
                         .metrics(
-                            selectors::simple::histogram(metrics_config.buckets.clone()),
+                            // JASON customization - CustomHistogramAggregator
+                            CustomHistogramAggregator::new(metrics_config),
                             aggregation::stateless_temporality_selector(),
                             opentelemetry::runtime::Tokio,
                         )
@@ -61,7 +63,8 @@ impl MetricsConfigurator for super::super::otlp::Config {
                         .build()?,
                     Temporality::Delta => opentelemetry_otlp::new_pipeline()
                         .metrics(
-                            selectors::simple::histogram(metrics_config.buckets.clone()),
+                            // JASON customization - CustomHistogramAggregator
+                            CustomHistogramAggregator::new(metrics_config),
                             aggregation::delta_temporality_selector(),
                             opentelemetry::runtime::Tokio,
                         )

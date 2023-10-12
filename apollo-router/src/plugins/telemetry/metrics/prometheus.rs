@@ -9,7 +9,7 @@ use opentelemetry::sdk::export::metrics::aggregation;
 use opentelemetry::sdk::metrics::controllers;
 use opentelemetry::sdk::metrics::controllers::BasicController;
 use opentelemetry::sdk::metrics::processors;
-use opentelemetry::sdk::metrics::selectors;
+// use opentelemetry::sdk::metrics::selectors;
 use opentelemetry::sdk::Resource;
 use opentelemetry::KeyValue;
 use prometheus::Encoder;
@@ -25,6 +25,7 @@ use crate::plugins::telemetry::config::MetricsCommon;
 use crate::plugins::telemetry::metrics::filter::FilterMeterProvider;
 use crate::plugins::telemetry::metrics::MetricsBuilder;
 use crate::plugins::telemetry::metrics::MetricsConfigurator;
+use crate::plugins::telemetry::metrics::custom_aggregator::CustomHistogramAggregator;
 use crate::router_factory::Endpoint;
 use crate::services::router;
 use crate::ListenAddr;
@@ -85,7 +86,8 @@ impl MetricsConfigurator for Config {
     ) -> Result<MetricsBuilder, BoxError> {
         if self.enabled {
             let mut controller = controllers::basic(processors::factory(
-                selectors::simple::histogram(metrics_config.buckets.clone()),
+                // JASON customization - CustomHistogramAggregator
+                CustomHistogramAggregator::new(metrics_config),
                 aggregation::stateless_temporality_selector(),
             ))
             .with_resource(Resource::new(

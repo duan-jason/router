@@ -2568,7 +2568,9 @@ mod tests {
                 "metrics": {
                     "common": {
                         "service_name": "apollo-router",
-                        "buckets": [5.0, 10.0, 20.0],
+                        "buckets": {
+                            "default": [5.0, 10.0, 20.0]
+                        },
                         "attributes": {
                             "supergraph": {
                                 "static": [
