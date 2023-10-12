@@ -1,5 +1,5 @@
 [package]
-name = "apollo-router"
+name = "uhg-custom-appollo-roouter"
 version = "1.31.0"
 authors = ["Apollo Graph, Inc. <packages@apollographql.com>"]
 repository = "https://github.com/apollographql/router/"
