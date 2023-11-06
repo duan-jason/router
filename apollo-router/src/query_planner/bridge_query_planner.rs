@@ -476,7 +476,16 @@ impl Service<QueryPlannerRequest> for BridgeQueryPlanner {
                 )
                 .await;
             let duration = start.elapsed().as_secs_f64();
-            tracing::info!(histogram.apollo_router_query_planning_time = duration);
+            // HCP_JUAN: Add label azure_region and consumer_name to query planning time metric
+            let azure_region = std::env::var("AZURE_REGION").unwrap_or(String::from(""));
+            let consumer_name = match context.get::<_, String>("x-consumer-name") {
+                Ok(_v) => match _v {
+                    Some(__v) => __v,
+                    None => String::from("")
+                },
+                _ => String::from("")
+            };
+            tracing::info!(histogram.apollo_router_query_planning_time = duration, azure_region = %azure_region, consumer_name = %consumer_name);
 
             match res {
                 Ok(query_planner_content) => Ok(QueryPlannerResponse::builder()

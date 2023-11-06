@@ -559,6 +559,15 @@ async fn plan_query(
         drop(entries);
     }
 
+    // HCP_JUAN: Add label azure_region and consumer_name to query_planning span
+    let azure_region = std::env::var("AZURE_REGION").unwrap_or(String::from(""));
+    let consumer_name = match context.get::<_, String>("x-consumer-name") {
+        Ok(_v) => match _v {
+            Some(__v) => __v,
+            None => String::from("")
+        },
+        _ => String::from("")
+    };
     planning
         .call(
             query_planner::CachingRequest::builder()
@@ -569,7 +578,9 @@ async fn plan_query(
         )
         .instrument(tracing::info_span!(
             QUERY_PLANNING_SPAN_NAME,
-            "otel.kind" = "INTERNAL"
+            "otel.kind" = "INTERNAL",
+            azure_region = %azure_region,
+            consumer_name = %consumer_name
         ))
         .await
 }

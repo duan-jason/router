@@ -70,14 +70,16 @@ where
             let idle: f64 = timings.idle as f64 / 1_000_000_000_f64;
             let busy: f64 = timings.busy as f64 / 1_000_000_000_f64;
             let name = span.metadata().name();
+            // HCP_JUAN: Add label azure_region to apollo_router_span metrics
+            let azure_region = std::env::var("AZURE_REGION").unwrap_or(String::from(""));
             if let Some(subgraph_name) = timings.subgraph.take() {
-                ::tracing::info!(histogram.apollo_router_span = duration, kind = %"duration", span = %name, subgraph = %subgraph_name);
-                ::tracing::info!(histogram.apollo_router_span = idle, kind = %"idle", span = %name, subgraph = %subgraph_name);
-                ::tracing::info!(histogram.apollo_router_span = busy, kind = %"busy", span = %name, subgraph = %subgraph_name);
+                ::tracing::info!(histogram.apollo_router_span = duration, kind = %"duration", span = %name, subgraph = %subgraph_name, azure_region = %azure_region);
+                ::tracing::info!(histogram.apollo_router_span = idle, kind = %"idle", span = %name, subgraph = %subgraph_name, azure_region = %azure_region);
+                ::tracing::info!(histogram.apollo_router_span = busy, kind = %"busy", span = %name, subgraph = %subgraph_name, azure_region = %azure_region);
             } else {
-                ::tracing::info!(histogram.apollo_router_span = duration, kind = %"duration", span = %name);
-                ::tracing::info!(histogram.apollo_router_span = idle, kind = %"idle", span = %name);
-                ::tracing::info!(histogram.apollo_router_span = busy, kind = %"busy", span = %name);
+                ::tracing::info!(histogram.apollo_router_span = duration, kind = %"duration", span = %name, azure_region = %azure_region);
+                ::tracing::info!(histogram.apollo_router_span = idle, kind = %"idle", span = %name, azure_region = %azure_region);
+                ::tracing::info!(histogram.apollo_router_span = busy, kind = %"busy", span = %name, azure_region = %azure_region);
             }
         }
     }

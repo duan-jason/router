@@ -521,13 +521,24 @@ impl Plugin for Telemetry {
                     .as_deref()
                     .unwrap_or_default();
 
+                // HCP_JUAN: Add label azure_region and consumer_name to subgraph span
+                let azure_region = std::env::var("AZURE_REGION").unwrap_or(String::from(""));
+                let consumer_name = match req.context.get::<_, String>("x-consumer-name") {
+                    Ok(_v) => match _v {
+                        Some(__v) => __v,
+                        None => String::from("")
+                    },
+                    _ => String::from("")
+                };
                 info_span!(
                     SUBGRAPH_SPAN_NAME,
                     "apollo.subgraph.name" = name.as_str(),
                     graphql.document = query,
                     graphql.operation.name = operation_name,
                     "otel.kind" = "INTERNAL",
-                    "apollo_private.ftv1" = field::Empty
+                    "apollo_private.ftv1" = field::Empty,
+                    azure_region = %azure_region,
+                    consumer_name = %consumer_name
                 )
             })
             .map_request(move |mut req: SubgraphRequest| {
