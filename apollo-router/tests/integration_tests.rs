@@ -8,16 +8,16 @@ use std::ffi::OsStr;
 use std::sync::Arc;
 use std::sync::Mutex;
 
-use apollo_router::graphql;
-use apollo_router::plugin::Plugin;
-use apollo_router::plugin::PluginInit;
-use apollo_router::services::router;
-use apollo_router::services::subgraph;
-use apollo_router::services::supergraph;
-use apollo_router::test_harness::mocks::persisted_queries::*;
-use apollo_router::Configuration;
-use apollo_router::Context;
-use apollo_router::_private::create_test_service_factory_from_yaml;
+use uhg_custom_appollo_roouter::graphql;
+use uhg_custom_appollo_roouter::plugin::Plugin;
+use uhg_custom_appollo_roouter::plugin::PluginInit;
+use uhg_custom_appollo_roouter::services::router;
+use uhg_custom_appollo_roouter::services::subgraph;
+use uhg_custom_appollo_roouter::services::supergraph;
+use uhg_custom_appollo_roouter::test_harness::mocks::persisted_queries::*;
+use uhg_custom_appollo_roouter::Configuration;
+use uhg_custom_appollo_roouter::Context;
+use uhg_custom_appollo_roouter::_private::create_test_service_factory_from_yaml;
 use futures::StreamExt;
 use http::header::ACCEPT;
 use http::header::CONTENT_TYPE;
@@ -236,7 +236,7 @@ async fn service_errors_should_be_propagated() {
     let message = "Unknown operation named \"invalidOperationName\"";
     let mut extensions_map = serde_json_bytes::map::Map::new();
     extensions_map.insert("code", "GRAPHQL_VALIDATION_FAILED".into());
-    let expected_error = apollo_router::graphql::Error::builder()
+    let expected_error = uhg_custom_appollo_roouter::graphql::Error::builder()
         .message(message)
         .extensions(extensions_map)
         .extension_code("VALIDATION_ERROR")
@@ -340,7 +340,7 @@ async fn mutation_should_work_over_post() {
 async fn automated_persisted_queries() {
     let (router, registry) = setup_router_and_registry(serde_json::json!({})).await;
 
-    let expected_apq_miss_error = apollo_router::graphql::Error::builder()
+    let expected_apq_miss_error = uhg_custom_appollo_roouter::graphql::Error::builder()
         .message("PersistedQueryNotFound")
         .extension_code("PERSISTED_QUERY_NOT_FOUND")
         .build();
@@ -467,7 +467,7 @@ async fn persisted_queries() {
     let actual = query_with_router(router.clone(), pq_request(UNKNOWN_QUERY_ID)).await;
     assert_eq!(
         actual.errors,
-        vec![apollo_router::graphql::Error::builder()
+        vec![uhg_custom_appollo_roouter::graphql::Error::builder()
             .message(&format!(
                 "Persisted query '{UNKNOWN_QUERY_ID}' not found in the persisted query list"
             ))
@@ -1141,7 +1141,7 @@ async fn http_query_rust(
 
 async fn query_rust(
     request: supergraph::Request,
-) -> (apollo_router::graphql::Response, CountingServiceRegistry) {
+) -> (uhg_custom_appollo_roouter::graphql::Response, CountingServiceRegistry) {
     query_rust_with_config(
         request,
         serde_json::json!({
@@ -1169,7 +1169,7 @@ async fn http_query_rust_with_config(
 async fn query_rust_with_config(
     request: supergraph::Request,
     config: serde_json::Value,
-) -> (apollo_router::graphql::Response, CountingServiceRegistry) {
+) -> (uhg_custom_appollo_roouter::graphql::Response, CountingServiceRegistry) {
     let (router, counting_registry) = setup_router_and_registry(config).await;
     (
         query_with_router(router, request.try_into().unwrap()).await,
@@ -1181,7 +1181,7 @@ async fn fallible_setup_router_and_registry(
     config: serde_json::Value,
 ) -> Result<(router::BoxCloneService, CountingServiceRegistry), BoxError> {
     let counting_registry = CountingServiceRegistry::new();
-    let router = apollo_router::TestHarness::builder()
+    let router = uhg_custom_appollo_roouter::TestHarness::builder()
         .with_subgraph_network_requests()
         .configuration_json(config)
         .map_err(|e| Box::new(e) as BoxError)?
@@ -1196,7 +1196,7 @@ async fn setup_router_and_registry_with_config(
     config: Configuration,
 ) -> Result<(router::BoxCloneService, CountingServiceRegistry), BoxError> {
     let counting_registry = CountingServiceRegistry::new();
-    let router = apollo_router::TestHarness::builder()
+    let router = uhg_custom_appollo_roouter::TestHarness::builder()
         .with_subgraph_network_requests()
         .configuration(Arc::new(config))
         .schema(include_str!("fixtures/supergraph.graphql"))
@@ -1400,7 +1400,7 @@ async fn all_stock_router_example_yamls_are_valid() {
 #[tracing_test::traced_test]
 async fn test_starstuff_supergraph_is_valid() {
     let schema = include_str!("../../examples/graphql/supergraph.graphql");
-    apollo_router::TestHarness::builder()
+    uhg_custom_appollo_roouter::TestHarness::builder()
         .schema(schema)
         .build_router()
         .await

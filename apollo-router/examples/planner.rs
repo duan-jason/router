@@ -1,12 +1,12 @@
 use std::ops::ControlFlow;
 
 use anyhow::Result;
-use apollo_router::layers::ServiceBuilderExt;
-use apollo_router::plugin::Plugin;
-use apollo_router::plugin::PluginInit;
-use apollo_router::register_plugin;
-use apollo_router::services::execution;
-use apollo_router::services::supergraph;
+use uhg_custom_appollo_roouter::layers::ServiceBuilderExt;
+use uhg_custom_appollo_roouter::plugin::Plugin;
+use uhg_custom_appollo_roouter::plugin::PluginInit;
+use uhg_custom_appollo_roouter::register_plugin;
+use uhg_custom_appollo_roouter::services::execution;
+use uhg_custom_appollo_roouter::services::supergraph;
 use tower::BoxError;
 use tower::ServiceBuilder;
 use tower::ServiceExt;
@@ -62,5 +62,5 @@ register_plugin!("apollo-test", "do_not_execute", DoNotExecute);
 // You can then send operations to it with `ab` or `hey` or any tool you like:
 // hey -n 1000 -c 10 -m POST -H 'Content-Type: application/json' -D 'path/to/an/anonymous/operation' http://localhost:4100
 fn main() -> Result<()> {
-    apollo_router::main()
+    uhg_custom_appollo_roouter::main()
 }
