@@ -23,3 +23,6 @@
 # Previous git submodules
 dockerfiles/federation-demo
 dockerfiles/federation2-demo
+
+#
+*.new

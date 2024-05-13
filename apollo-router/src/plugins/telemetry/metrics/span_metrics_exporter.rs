@@ -66,18 +66,21 @@ where
         if let Some(timings) = extensions.get_mut::<Timings>() {
             let duration = timings.start.elapsed().as_secs_f64();
 
+            // JASON customization: add lables azure_region to apollo_router_span
+            let azure_region = crate::uhg_custom::get_uhg_azure_region();
+
             // Convert it in seconds
             let idle: f64 = timings.idle as f64 / 1_000_000_000_f64;
             let busy: f64 = timings.busy as f64 / 1_000_000_000_f64;
             let name = span.metadata().name();
             if let Some(subgraph_name) = timings.subgraph.take() {
-                ::tracing::info!(histogram.apollo_router_span = duration, kind = %"duration", span = %name, subgraph = %subgraph_name);
-                ::tracing::info!(histogram.apollo_router_span = idle, kind = %"idle", span = %name, subgraph = %subgraph_name);
-                ::tracing::info!(histogram.apollo_router_span = busy, kind = %"busy", span = %name, subgraph = %subgraph_name);
+                ::tracing::info!(histogram.apollo_router_span = duration, kind = %"duration", span = %name, subgraph = %subgraph_name, azure_region = %azure_region);
+                ::tracing::info!(histogram.apollo_router_span = idle, kind = %"idle", span = %name, subgraph = %subgraph_name, azure_region = %azure_region);
+                ::tracing::info!(histogram.apollo_router_span = busy, kind = %"busy", span = %name, subgraph = %subgraph_name, azure_region = %azure_region);
             } else {
-                ::tracing::info!(histogram.apollo_router_span = duration, kind = %"duration", span = %name);
-                ::tracing::info!(histogram.apollo_router_span = idle, kind = %"idle", span = %name);
-                ::tracing::info!(histogram.apollo_router_span = busy, kind = %"busy", span = %name);
+                ::tracing::info!(histogram.apollo_router_span = duration, kind = %"duration", span = %name, azure_region = %azure_region);
+                ::tracing::info!(histogram.apollo_router_span = idle, kind = %"idle", span = %name, azure_region = %azure_region);
+                ::tracing::info!(histogram.apollo_router_span = busy, kind = %"busy", span = %name, azure_region = %azure_region);
             }
         }
     }
