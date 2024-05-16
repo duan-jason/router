@@ -59,6 +59,10 @@ pub mod uhg_custom;  // JASON customization
 
     add lables (azure_region, consumer_name) to query planning (QUERY_PLANNING_SPAN_NAME) span
 
+9. apollo-router/src/plugins/telemetry/mod.rs
+
+    backfill "correlationId" for root span
+
 # publish
 
 ```
