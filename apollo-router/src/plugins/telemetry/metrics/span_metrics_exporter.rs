@@ -68,20 +68,25 @@ where
         if let Some(timings) = extensions.get_mut::<Timings>() {
             let duration = timings.start.elapsed().as_secs_f64();
 
+            // JASON customization: add lables azure_region to apollo_router_span
+            let azure_region = crate::uhg_custom::get_uhg_azure_region();
+
             // Convert it in seconds
             let idle: f64 = timings.idle as f64 / 1_000_000_000_f64;
             let busy: f64 = timings.busy as f64 / 1_000_000_000_f64;
             let name = span.metadata().name();
 
+            // JASON customization - begin!
             if let Some(subgraph_name) = timings.subgraph.take() {
-                record(duration, "duration", name, Some(&subgraph_name));
-                record(duration, "idle", name, Some(&subgraph_name));
-                record(duration, "busy", name, Some(&subgraph_name));
+                record(duration, "duration", name, Some(&subgraph_name), &azure_region);
+                record(idle, "idle", name, Some(&subgraph_name), &azure_region);
+                record(busy, "busy", name, Some(&subgraph_name), &azure_region);
             } else {
-                record(duration, "duration", name, None);
-                record(idle, "idle", name, None);
-                record(busy, "busy", name, None);
+                record(duration, "duration", name, None, &azure_region);
+                record(idle, "idle", name, None, &azure_region);
+                record(busy, "busy", name, None, &azure_region);
             }
+            // JASON customization - end!
         }
     }
 
@@ -108,7 +113,7 @@ where
     }
 }
 
-fn record(duration: f64, kind: &'static str, name: &str, subgraph_name: Option<&str>) {
+fn record(duration: f64, kind: &'static str, name: &str, subgraph_name: Option<&str>, azure_region: &str) {
     // Avoid a heap allocation for a vec by using a slice
     let attrs = [
         KeyValue::new("kind", kind),
@@ -121,6 +126,9 @@ fn record(duration: f64, kind: &'static str, name: &str, subgraph_name: Option<&
                     .unwrap_or_else(|| "".into()),
             ),
         ),
+
+        // JASON customization: add lables azure_region
+        KeyValue::new("azure_region", Value::String(azure_region.to_string().into())),
     ];
     let splice = if subgraph_name.is_some() {
         &attrs

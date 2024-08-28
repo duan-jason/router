@@ -24,10 +24,10 @@ use std::time::Duration;
 
 use anyhow::anyhow;
 use apollo_router::make_fake_batch;
-use apollo_router::services::router;
-use apollo_router::services::router::BoxCloneService;
-use apollo_router::services::supergraph;
-use apollo_router::TestHarness;
+use uhg_custom_appollo_roouter::services::router;
+use uhg_custom_appollo_roouter::services::router::BoxCloneService;
+use uhg_custom_appollo_roouter::services::supergraph;
+use uhg_custom_appollo_roouter::TestHarness;
 use axum::body::Bytes;
 use axum::routing::post;
 use axum::Extension;

@@ -21,13 +21,13 @@ async fn test_request_extensions_is_null() {
 
     let request =
         serde_json::json!({"query": "{__typename}", "extensions": serde_json::Value::Null});
-    let request = apollo_router::services::router::Request::fake_builder()
+    let request = uhg_custom_appollo_roouter::services::router::Request::fake_builder()
         .body(request.to_string())
         .method(hyper::Method::POST)
         .header("content-type", "application/json")
         .build()
         .unwrap();
-    let response = apollo_router::TestHarness::builder()
+    let response = uhg_custom_appollo_roouter::TestHarness::builder()
         .schema(include_str!("../fixtures/supergraph.graphql"))
         .build_router()
         .await
@@ -49,13 +49,13 @@ async fn test_request_extensions_is_null() {
 #[tokio::test]
 async fn test_syntax_error() {
     let request = serde_json::json!({"query": "{__typename"});
-    let request = apollo_router::services::router::Request::fake_builder()
+    let request = uhg_custom_appollo_roouter::services::router::Request::fake_builder()
         .body(request.to_string())
         .method(hyper::Method::POST)
         .header("content-type", "application/json")
         .build()
         .unwrap();
-    let response = apollo_router::TestHarness::builder()
+    let response = uhg_custom_appollo_roouter::TestHarness::builder()
         .schema(include_str!("../fixtures/supergraph.graphql"))
         .build_router()
         .await
@@ -92,13 +92,13 @@ async fn test_syntax_error() {
 #[tokio::test]
 async fn test_validation_error() {
     let request = serde_json::json!({"query": "{...a} fragment unused on Query { me { id } } fragment a on Query{me {id} topProducts(first: 5.5) {id}}"});
-    let request = apollo_router::services::router::Request::fake_builder()
+    let request = uhg_custom_appollo_roouter::services::router::Request::fake_builder()
         .body(request.to_string())
         .method(hyper::Method::POST)
         .header("content-type", "application/json")
         .build()
         .unwrap();
-    let response = apollo_router::TestHarness::builder()
+    let response = uhg_custom_appollo_roouter::TestHarness::builder()
         .schema(include_str!("../fixtures/supergraph.graphql"))
         .build_router()
         .await

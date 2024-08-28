@@ -368,6 +368,15 @@ impl Plugin for Telemetry {
                         if let Ok(Some(operation_name)) = &operation_name {
                             span.record("graphql.operation.name", operation_name);
                         }
+
+                        // JASON customization - begin!
+                        // backfill "correlationId" for root span, added this for version 1.46.0
+                        let correlation_id = response.context.get::<_, String>("x-correlation-id");
+                        if let Ok(Some(correlation_id)) = &correlation_id {
+                            span.record("correlationId", correlation_id);
+                        }
+                        // JASON customization - end!
+                        
                         match (&operation_kind, &operation_name) {
                             (Ok(Some(kind)), Ok(Some(name))) => span.set_span_dyn_attribute(
                                 OTEL_NAME.into(),

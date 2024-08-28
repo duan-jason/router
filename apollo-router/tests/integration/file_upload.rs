@@ -971,7 +971,7 @@ mod helper {
         /// what is expected.
         pub async fn run_test(
             self,
-            validation_fn: impl Fn(apollo_router::graphql::Response),
+            validation_fn: impl Fn(uhg_custom_appollo_roouter::graphql::Response),
         ) -> Result<(), BoxError> {
             // Ensure that we have the test keys before running
             // Note: The [IntegrationTest] ensures that these test credentials get
@@ -1094,11 +1094,11 @@ mod helper {
 
     impl IntoResponse for FileUploadError {
         fn into_response(self) -> axum::response::Response {
-            let error = apollo_router::graphql::Error::builder()
+            let error = uhg_custom_appollo_roouter::graphql::Error::builder()
                 .message(self.to_string().as_str())
                 .extension_code("FILE_UPLOAD_ERROR") // Without this line, the error cannot be built...
                 .build();
-            let response = apollo_router::graphql::Response::builder()
+            let response = uhg_custom_appollo_roouter::graphql::Response::builder()
                 .error(error)
                 .build();
 

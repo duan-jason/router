@@ -24,7 +24,7 @@ router-bridge = "=0.6.0+v2.9.0"
 
 [dev-dependencies]
 anyhow = "1"
-apollo-router = { path = "../apollo-router" }
+uhg-custom-appollo-roouter = { path = "../apollo-router" }
 async-trait.workspace = true
 schemars.workspace = true
 serde.workspace = true

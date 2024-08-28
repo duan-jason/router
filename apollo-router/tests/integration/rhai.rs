@@ -1,6 +1,6 @@
-use apollo_router::graphql;
-use apollo_router::services::supergraph;
-use apollo_router::TestHarness;
+use uhg_custom_appollo_roouter::graphql;
+use uhg_custom_appollo_roouter::services::supergraph;
+use uhg_custom_appollo_roouter::TestHarness;
 use tower::ServiceExt;
 
 // This test will fail if run with the "multi_thread" flavor.

@@ -1,5 +1,5 @@
 use apollo_router::plugin::test::MockSubgraph;
-use apollo_router::services::subgraph;
+use uhg_custom_appollo_roouter::services::subgraph;
 use base64::prelude::BASE64_STANDARD;
 use base64::Engine as _;
 use prost::Message;
