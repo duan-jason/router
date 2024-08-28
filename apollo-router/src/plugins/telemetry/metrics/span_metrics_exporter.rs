@@ -76,6 +76,7 @@ where
             let busy: f64 = timings.busy as f64 / 1_000_000_000_f64;
             let name = span.metadata().name();
 
+            // JASON customization - begin!
             if let Some(subgraph_name) = timings.subgraph.take() {
                 record(duration, "duration", name, Some(&subgraph_name), azure_region);
                 record(idle, "idle", name, Some(&subgraph_name), azure_region);
@@ -85,6 +86,7 @@ where
                 record(idle, "idle", name, None, azure_region);
                 record(busy, "busy", name, None, azure_region);
             }
+            // JASON customization - end!
         }
     }
 
@@ -124,6 +126,8 @@ fn record(duration: f64, kind: &'static str, name: &str, subgraph_name: Option<&
                     .unwrap_or_else(|| "".into()),
             ),
         ),
+
+        // JASON customization: add lables azure_region
         KeyValue::new("azure_region", Value::String(azure_region.to_string().into())),
     ];
     let splice = if subgraph_name.is_some() {
