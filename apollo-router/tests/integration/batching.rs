@@ -1,4 +1,4 @@
-use apollo_router::graphql::Request;
+use uhg_custom_appollo_roouter::graphql::Request;
 use insta::assert_yaml_snapshot;
 use itertools::Itertools;
 use tower::BoxError;
@@ -833,8 +833,8 @@ async fn it_handles_single_invalid_graphql() -> Result<(), BoxError> {
 mod helper {
     use std::time::Duration;
 
-    use apollo_router::graphql::Request;
-    use apollo_router::graphql::Response;
+    use uhg_custom_appollo_roouter::graphql::Request;
+    use uhg_custom_appollo_roouter::graphql::Response;
     use tower::BoxError;
     use wiremock::matchers;
     use wiremock::MockServer;

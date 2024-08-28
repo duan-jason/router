@@ -2,12 +2,12 @@
 //! Please ensure that any tests added to this file use the tokio multi-threaded test executor.
 //!
 
-use apollo_router::graphql::Request;
-use apollo_router::graphql::Response;
+use uhg_custom_appollo_roouter::graphql::Request;
+use uhg_custom_appollo_roouter::graphql::Response;
 use apollo_router::plugin::test::MockSubgraph;
-use apollo_router::services::supergraph;
+use uhg_custom_appollo_roouter::services::supergraph;
 use apollo_router::MockedSubgraphs;
-use apollo_router::TestHarness;
+use uhg_custom_appollo_roouter::TestHarness;
 use serde::Deserialize;
 use serde_json::json;
 use serde_json_bytes::ByteString;
