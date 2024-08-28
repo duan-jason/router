@@ -1,8 +1,8 @@
-use apollo_router::plugin::test::MockSubgraph;
+use uhg_custom_appollo_roouter::plugin::test::MockSubgraph;
 use uhg_custom_appollo_roouter::services::router;
 use uhg_custom_appollo_roouter::services::supergraph;
-use apollo_router::Context;
-use apollo_router::MockedSubgraphs;
+use uhg_custom_appollo_roouter::Context;
+use uhg_custom_appollo_roouter::MockedSubgraphs;
 use fred::cmd;
 use fred::prelude::*;
 use fred::types::ScanType;

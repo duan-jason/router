@@ -38,7 +38,7 @@ pub mod uhg_custom;  // JASON customization
 
     replace all ```apollo-router = { ``` with ```uhg-custom-appollo-roouter = {```  
 
-5. fix ```apollo_router``` references in rust code files (.rs) in ```apollo-router``` folder  (```./apollo-router/**/*.rs```)
+5. fix ```apollo_router``` references in rust code files (.rs) in ```apollo-router``` folder  (files to include ```./apollo-router```, files to exclude ```*.md```)
 
     replace all ```use apollo_router::``` with ```use uhg_custom_appollo_roouter::```
 

@@ -4,9 +4,9 @@
 
 use uhg_custom_appollo_roouter::graphql::Request;
 use uhg_custom_appollo_roouter::graphql::Response;
-use apollo_router::plugin::test::MockSubgraph;
+use uhg_custom_appollo_roouter::plugin::test::MockSubgraph;
 use uhg_custom_appollo_roouter::services::supergraph;
-use apollo_router::MockedSubgraphs;
+use uhg_custom_appollo_roouter::MockedSubgraphs;
 use uhg_custom_appollo_roouter::TestHarness;
 use serde::Deserialize;
 use serde_json::json;

@@ -16,7 +16,7 @@ use std::sync::Arc;
 use std::time::Duration;
 
 use anyhow::anyhow;
-use apollo_router::make_fake_batch;
+use uhg_custom_appollo_roouter::make_fake_batch;
 use uhg_custom_appollo_roouter::services::router;
 use uhg_custom_appollo_roouter::services::router::BoxCloneService;
 use uhg_custom_appollo_roouter::services::supergraph;
