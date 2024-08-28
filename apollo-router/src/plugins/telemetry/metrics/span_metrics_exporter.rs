@@ -78,13 +78,13 @@ where
 
             // JASON customization - begin!
             if let Some(subgraph_name) = timings.subgraph.take() {
-                record(duration, "duration", name, Some(&subgraph_name), azure_region);
-                record(idle, "idle", name, Some(&subgraph_name), azure_region);
-                record(busy, "busy", name, Some(&subgraph_name), azure_region);
+                record(duration, "duration", name, Some(&subgraph_name), &azure_region);
+                record(idle, "idle", name, Some(&subgraph_name), &azure_region);
+                record(busy, "busy", name, Some(&subgraph_name), &azure_region);
             } else {
-                record(duration, "duration", name, None, azure_region);
-                record(idle, "idle", name, None, azure_region);
-                record(busy, "busy", name, None, azure_region);
+                record(duration, "duration", name, None, &azure_region);
+                record(idle, "idle", name, None, &azure_region);
+                record(busy, "busy", name, None, &azure_region);
             }
             // JASON customization - end!
         }
