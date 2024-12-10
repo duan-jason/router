@@ -81,6 +81,20 @@ pub mod uhg_custom;  // JASON customization
     // JASON customization - end!
     ```
 
+    line #116: (add parameter azure_region)
+    ```
+    fn record(duration: f64, kind: &'static str, name: &str, subgraph_name: Option<&str>, azure_region: &str) {
+        ...
+        let attrs = [
+            ...
+
+            // JASON customization: add lables azure_region
+            KeyValue::new("azure_region", Value::String(azure_region.to_string().into())),
+        ];
+        ...
+    }
+    ```
+
 7. apollo-router/src/plugins/telemetry/span_factory.rs
 
     add lables (azure_region, consumer_name, role_id, correlation_id, cid) to request (REQUEST_SPAN_NAME) span
@@ -89,6 +103,11 @@ pub mod uhg_custom;  // JASON customization
     ```
     // JASON customization: add lables
     let (azure_region, consumer_name, role_id, correlation_id, cid) = crate::uhg_custom::get_uhg_labels(Some(request.headers()), None);
+
+    ...
+    // JASON customization: add lables azure_region
+        KeyValue::new("azure_region", Value::String(azure_region.to_string().into())),
+    ...
     ```
 
     line #48 (error_span), 72 (info_span)
@@ -174,6 +193,7 @@ pub mod uhg_custom;  // JASON customization
 
 ```
     cd apollo-router
+    cargo install --path . --force
     cargo build
     cargo test
     cargo publish  (version # in apollo-router/Cargo.toml)

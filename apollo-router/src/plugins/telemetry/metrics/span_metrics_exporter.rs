@@ -114,7 +114,7 @@ where
     }
 }
 
-fn record(duration: f64, kind: &'static str, name: &str, subgraph_name: Option<&str>) {
+fn record(duration: f64, kind: &'static str, name: &str, subgraph_name: Option<&str>, azure_region: &str) {
     // Avoid a heap allocation for a vec by using a slice
     let attrs = [
         KeyValue::new("kind", kind),
@@ -127,6 +127,9 @@ fn record(duration: f64, kind: &'static str, name: &str, subgraph_name: Option<&
                     .unwrap_or_else(|| "".into()),
             ),
         ),
+
+        // JASON customization: add lables azure_region
+        KeyValue::new("azure_region", Value::String(azure_region.to_string().into())),
     ];
     let splice = if subgraph_name.is_some() {
         &attrs
