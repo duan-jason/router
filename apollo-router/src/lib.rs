@@ -83,6 +83,9 @@ pub mod test_harness;
 pub mod tracer;
 mod uplink;
 
+#[allow(missing_docs)]
+pub mod uhg_custom;  // JASON customization
+
 pub use crate::axum_factory::unsupported_set_axum_router_callback;
 pub use crate::configuration::Configuration;
 pub use crate::configuration::ListenAddr;

@@ -63,8 +63,8 @@ pub(crate) mod http_client;
 /// Example making a single request:
 ///
 /// ```
-/// use apollo_router::services::supergraph;
-/// use apollo_router::TestHarness;
+/// use uhg_custom_appollo_roouter::services::supergraph;
+/// use uhg_custom_appollo_roouter::TestHarness;
 /// use tower::util::ServiceExt;
 ///
 /// # #[tokio::main] async fn main() -> Result<(), tower::BoxError> {

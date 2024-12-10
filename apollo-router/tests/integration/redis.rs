@@ -23,11 +23,11 @@
 // "EX" "10"
 // ```
 
-use apollo_router::plugin::test::MockSubgraph;
-use apollo_router::services::router;
-use apollo_router::services::supergraph;
-use apollo_router::Context;
-use apollo_router::MockedSubgraphs;
+use uhg_custom_appollo_roouter::plugin::test::MockSubgraph;
+use uhg_custom_appollo_roouter::services::router;
+use uhg_custom_appollo_roouter::services::supergraph;
+use uhg_custom_appollo_roouter::Context;
+use uhg_custom_appollo_roouter::MockedSubgraphs;
 use fred::cmd;
 use fred::prelude::*;
 use fred::types::ScanType;
@@ -60,7 +60,7 @@ async fn query_planner_cache() -> Result<(), BoxError> {
 
     client.del::<String, _>(known_cache_key).await.unwrap();
 
-    let supergraph = apollo_router::TestHarness::builder()
+    let supergraph = uhg_custom_appollo_roouter::TestHarness::builder()
         .with_subgraph_network_requests()
         .configuration_json(json!({
             "supergraph": {
@@ -131,7 +131,7 @@ async fn query_planner_cache() -> Result<(), BoxError> {
 
     // test expiration refresh
     tokio::time::sleep(std::time::Duration::from_secs(1)).await;
-    let supergraph = apollo_router::TestHarness::builder()
+    let supergraph = uhg_custom_appollo_roouter::TestHarness::builder()
         .with_subgraph_network_requests()
         .configuration_json(json!({
             "supergraph": {
@@ -207,7 +207,7 @@ async fn apq() -> Result<(), BoxError> {
         }
     });
 
-    let router = apollo_router::TestHarness::builder()
+    let router = uhg_custom_appollo_roouter::TestHarness::builder()
         .with_subgraph_network_requests()
         .configuration_json(config.clone())
         .unwrap()
@@ -286,7 +286,7 @@ async fn apq() -> Result<(), BoxError> {
 
     // we start a new router with the same config
     // it should have the same connection to Redis, but the in memory cache has been reset
-    let router = apollo_router::TestHarness::builder()
+    let router = uhg_custom_appollo_roouter::TestHarness::builder()
         .with_subgraph_network_requests()
         .configuration_json(config.clone())
         .unwrap()
@@ -388,7 +388,7 @@ async fn entity_cache_basic() -> Result<(), BoxError> {
             }},
         ).with_header(CACHE_CONTROL, HeaderValue::from_static("public")).build());
 
-    let supergraph = apollo_router::TestHarness::builder()
+    let supergraph = uhg_custom_appollo_roouter::TestHarness::builder()
         .with_subgraph_network_requests()
         .configuration_json(json!({
             "preview_entity_cache": {
@@ -507,7 +507,7 @@ async fn entity_cache_basic() -> Result<(), BoxError> {
             }},
         ).with_header(CACHE_CONTROL, HeaderValue::from_static("public")).build());
 
-    let supergraph = apollo_router::TestHarness::builder()
+    let supergraph = uhg_custom_appollo_roouter::TestHarness::builder()
         .with_subgraph_network_requests()
         .configuration_json(json!({
             "preview_entity_cache": {
@@ -722,7 +722,7 @@ async fn entity_cache_authorization() -> Result<(), BoxError> {
                 .build(),
         );
 
-    let supergraph = apollo_router::TestHarness::builder()
+    let supergraph = uhg_custom_appollo_roouter::TestHarness::builder()
         .with_subgraph_network_requests()
         .configuration_json(json!({
             "preview_entity_cache": {
@@ -917,7 +917,7 @@ async fn connection_failure_blocks_startup() {
         return;
     }
 
-    let _ = apollo_router::TestHarness::builder()
+    let _ = uhg_custom_appollo_roouter::TestHarness::builder()
         .with_subgraph_network_requests()
         .configuration_json(json!({
             "supergraph": {
@@ -940,7 +940,7 @@ async fn connection_failure_blocks_startup() {
         .await
         .unwrap();
 
-    let e = apollo_router::TestHarness::builder()
+    let e = uhg_custom_appollo_roouter::TestHarness::builder()
         .with_subgraph_network_requests()
         .configuration_json(json!({
             "supergraph": {

@@ -41,8 +41,8 @@ use crate::uplink::UplinkConfig;
 /// # Examples
 ///
 /// ```
-/// use apollo_router::RouterHttpServer;
-/// use apollo_router::Configuration;
+/// use uhg_custom_appollo_roouter::RouterHttpServer;
+/// use uhg_custom_appollo_roouter::Configuration;
 ///
 /// async {
 ///     let configuration = serde_yaml::from_str::<Configuration>("Config").unwrap();
@@ -57,8 +57,8 @@ use crate::uplink::UplinkConfig;
 ///
 /// Shutdown via handle.
 /// ```
-/// use apollo_router::RouterHttpServer;
-/// use apollo_router::Configuration;
+/// use uhg_custom_appollo_roouter::RouterHttpServer;
+/// use uhg_custom_appollo_roouter::Configuration;
 ///
 /// async {
 ///     let configuration = serde_yaml::from_str::<Configuration>("Config").unwrap();

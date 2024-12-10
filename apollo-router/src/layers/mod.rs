@@ -53,8 +53,8 @@ pub trait ServiceBuilderExt<L>: Sized {
     /// # use tower::ServiceBuilder;
     /// # use tower_service::Service;
     /// # use tracing::info_span;
-    /// # use apollo_router::services::supergraph;
-    /// # use apollo_router::layers::ServiceBuilderExt;
+    /// # use uhg_custom_appollo_roouter::services::supergraph;
+    /// # use uhg_custom_appollo_roouter::layers::ServiceBuilderExt;
     /// # fn test(service: supergraph::BoxService) {
     /// let _ = ServiceBuilder::new()
     ///     .checkpoint(|req: supergraph::Request|{
@@ -113,8 +113,8 @@ pub trait ServiceBuilderExt<L>: Sized {
     /// # use tower::ServiceBuilder;
     /// # use tower_service::Service;
     /// # use tracing::info_span;
-    /// # use apollo_router::services::supergraph;
-    /// # use apollo_router::layers::ServiceBuilderExt;
+    /// # use uhg_custom_appollo_roouter::services::supergraph;
+    /// # use uhg_custom_appollo_roouter::layers::ServiceBuilderExt;
     /// # fn test(service: supergraph::BoxService) {
     /// let _ = ServiceBuilder::new()
     ///     .checkpoint_async(|req: supergraph::Request|
@@ -171,8 +171,8 @@ pub trait ServiceBuilderExt<L>: Sized {
     /// # use tower::ServiceBuilder;
     /// # use tower_service::Service;
     /// # use tracing::info_span;
-    /// # use apollo_router::services::supergraph;
-    /// # use apollo_router::layers::ServiceBuilderExt;
+    /// # use uhg_custom_appollo_roouter::services::supergraph;
+    /// # use uhg_custom_appollo_roouter::layers::ServiceBuilderExt;
     /// # fn test(service: supergraph::BoxService) {
     /// let _ = ServiceBuilder::new()
     ///     .oneshot_checkpoint_async(|req: supergraph::Request|
@@ -215,8 +215,8 @@ pub trait ServiceBuilderExt<L>: Sized {
     /// # use tower::ServiceBuilder;
     /// # use tower_service::Service;
     /// # use tracing::info_span;
-    /// # use apollo_router::services::supergraph;
-    /// # use apollo_router::layers::ServiceBuilderExt;
+    /// # use uhg_custom_appollo_roouter::services::supergraph;
+    /// # use uhg_custom_appollo_roouter::layers::ServiceBuilderExt;
     /// # fn test(service: supergraph::BoxService) {
     /// let _ = ServiceBuilder::new()
     ///             .buffered()
@@ -244,8 +244,8 @@ pub trait ServiceBuilderExt<L>: Sized {
     /// # use tower::ServiceBuilder;
     /// # use tower_service::Service;
     /// # use tracing::info_span;
-    /// # use apollo_router::services::supergraph;
-    /// # use apollo_router::layers::ServiceBuilderExt;
+    /// # use uhg_custom_appollo_roouter::services::supergraph;
+    /// # use uhg_custom_appollo_roouter::layers::ServiceBuilderExt;
     /// # fn test(service: supergraph::BoxService) {
     /// let instrumented = ServiceBuilder::new()
     ///             .instrument(|_request| info_span!("query_planning"))
@@ -283,8 +283,8 @@ pub trait ServiceBuilderExt<L>: Sized {
     /// # Example
     ///
     /// ```
-    /// use apollo_router::services::supergraph;
-    /// use apollo_router::layers::ServiceBuilderExt as _;
+    /// use uhg_custom_appollo_roouter::services::supergraph;
+    /// use uhg_custom_appollo_roouter::layers::ServiceBuilderExt as _;
     /// use tower::ServiceExt as _;
     ///
     /// struct ExamplePlugin;
@@ -344,9 +344,9 @@ pub trait ServiceBuilderExt<L>: Sized {
     /// # use tower::util::BoxService;
     /// # use tower_service::Service;
     /// # use tracing::info_span;
-    /// # use apollo_router::Context;
-    /// # use apollo_router::services::supergraph;
-    /// # use apollo_router::layers::ServiceBuilderExt;
+    /// # use uhg_custom_appollo_roouter::Context;
+    /// # use uhg_custom_appollo_roouter::services::supergraph;
+    /// # use uhg_custom_appollo_roouter::layers::ServiceBuilderExt;
     /// # fn test(service: supergraph::BoxService) {
     /// let _ : supergraph::BoxService = ServiceBuilder::new()
     ///     .map_future_with_request_data(
@@ -393,7 +393,7 @@ impl<L> ServiceBuilderExt<L> for ServiceBuilder<L> {
 /// without assigning it a name in that module’s namespace.
 ///
 /// ```
-/// use apollo_router::layers::ServiceExt as _;
+/// use uhg_custom_appollo_roouter::layers::ServiceExt as _;
 /// use tower::ServiceExt as _;
 /// ```
 pub trait ServiceExt<Request>: Service<Request> {
@@ -418,8 +418,8 @@ pub trait ServiceExt<Request>: Service<Request> {
     /// # Example
     ///
     /// ```
-    /// use apollo_router::services::supergraph;
-    /// use apollo_router::layers::ServiceExt as _;
+    /// use uhg_custom_appollo_roouter::services::supergraph;
+    /// use uhg_custom_appollo_roouter::layers::ServiceExt as _;
     /// use tower::ServiceExt as _;
     ///
     /// struct ExamplePlugin;
@@ -482,10 +482,10 @@ pub trait ServiceExt<Request>: Service<Request> {
     /// # use tower::util::BoxService;
     /// # use tower_service::Service;
     /// # use tracing::info_span;
-    /// # use apollo_router::Context;
-    /// # use apollo_router::services::supergraph;
-    /// # use apollo_router::layers::ServiceBuilderExt;
-    /// # use apollo_router::layers::ServiceExt as ApolloServiceExt;
+    /// # use uhg_custom_appollo_roouter::Context;
+    /// # use uhg_custom_appollo_roouter::services::supergraph;
+    /// # use uhg_custom_appollo_roouter::layers::ServiceBuilderExt;
+    /// # use uhg_custom_appollo_roouter::layers::ServiceExt as ApolloServiceExt;
     /// # fn test(service: supergraph::BoxService) {
     /// let _ : supergraph::BoxService = service
     ///     .map_future_with_request_data(

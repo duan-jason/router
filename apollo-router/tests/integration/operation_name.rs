@@ -1,5 +1,5 @@
-use apollo_router::plugin::test::MockSubgraph;
-use apollo_router::services::supergraph::Request;
+use uhg_custom_appollo_roouter::plugin::test::MockSubgraph;
+use uhg_custom_appollo_roouter::services::supergraph::Request;
 use serde_json::json;
 use tower::ServiceExt;
 
@@ -171,8 +171,8 @@ async fn incorrect_operation_name() {
     "###);
 }
 
-async fn make_request(request: Request) -> apollo_router::graphql::Response {
-    apollo_router::TestHarness::builder()
+async fn make_request(request: Request) -> uhg_custom_appollo_roouter::graphql::Response {
+    uhg_custom_appollo_roouter::TestHarness::builder()
         .configuration_json(json!({
             "include_subgraph_errors": {
                 "all": true,

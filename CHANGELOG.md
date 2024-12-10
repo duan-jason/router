@@ -7099,7 +7099,7 @@ The `apollo-router` library crate now sets the global allocator so that custom b
 
 ```toml
 [dependencies]
-apollo-router = {version = "[…]", default-features = false}
+uhg-custom-appollo-roouter = {version = "[…]", default-features = false}
 ```
 
 Library crates that depend on `apollo-router` (if any) should also do this in order to leave the choice to the eventual executable. (Cargo default features are only disabled if *all* dependents specify `default-features = false`.)
