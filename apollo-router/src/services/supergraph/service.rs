@@ -695,6 +695,9 @@ async fn plan_query(
         });
     }
 
+    // JASON customization: add lables
+    let (azure_region, consumer_name, _, _, _) = crate::uhg_custom::get_uhg_labels(None, Some(&context));
+
     let qpr = planning
         .call(
             query_planner::CachingRequest::builder()
@@ -705,6 +708,12 @@ async fn plan_query(
         )
         .instrument(tracing::info_span!(
             QUERY_PLANNING_SPAN_NAME,
+
+            // JASON customization - begin!
+            azure_region = %azure_region,
+            consumer_name = %consumer_name,
+            // JASON customization - end!
+
             "otel.kind" = "INTERNAL"
         ))
         .await?;
